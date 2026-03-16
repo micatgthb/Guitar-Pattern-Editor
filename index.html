@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Guitar Pattern Editor</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<h2>Guitar Pattern Editor</h2>
+
+<div id="controls">
+
+<label>Startbund
+<input type="number" id="startFret" value="0">
+</label>
+
+<label>Endbund
+<input type="number" id="endFret" value="12">
+</label>
+
+<label>Tonart
+<select id="root"></select>
+</label>
+
+<label>Skala
+<select id="scale"></select>
+</label>
+
+<label>Position
+<select id="position"></select>
+</label>
+
+<label>Anzeige
+<select id="displayMode">
+<option value="notes">Noten</option>
+<option value="intervals">Intervalle</option>
+</select>
+</label>
+
+<button id="applyScaleBtn" onclick="build();applyScale();updateExportHeader();">
+Skala anzeigen
+</button>
+
+<button id="rebuildBtn">Bundbereich</button>
+<button id="clearBtn">Clear</button>
+<button id="exportBtn">PNG Export</button>
+
+<div id="exportArea">
+
+<div id="exportHeader"></div>
+
+<div id="board-wrapper">
+<div id="grid"></div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<script src="js/scales.js?v=1"></script>
+<script src="js/fretboard.js?v=1"></script>
+<script src="js/app.js?v=1"></script>
+<script src="js/export.js?v=1"></script>
+
+</body>
+</html>
