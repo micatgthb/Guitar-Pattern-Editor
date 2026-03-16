@@ -1,13 +1,34 @@
-const strings = ["e", "B", "G", "D", "A", "E"];
+const instruments = {
 
-const tuning = {
-  e: "E",
-  B: "B",
-  G: "G",
-  D: "D",
-  A: "A",
-  E: "E"
-};
+  guitar:{
+    strings:["e","B","G","D","A","E"],
+    tuning:{
+      e:"E",
+      B:"B",
+      G:"G",
+      D:"D",
+      A:"A",
+      E:"E"
+    }
+  },
+
+  bass:{
+    strings:["G","D","A","E"],
+    tuning:{
+      G:"G",
+      D:"D",
+      A:"A",
+      E:"E"
+    }
+  }
+
+}
+
+function getInstrument(){
+  const sel=document.getElementById("instrument")
+  if(!sel) return instruments.guitar
+  return instruments[sel.value] || instruments.guitar
+}
 
 let grid;
 
@@ -19,6 +40,10 @@ function getNote(openNote, fret) {
 function build(){
 
 grid = document.getElementById("grid");
+
+const instrument = getInstrument()
+const strings = instrument.strings
+const tuning = instrument.tuning
 
 const startFret = parseInt(document.getElementById("startFret").value, 10);
 const endFret = parseInt(document.getElementById("endFret").value, 10);
@@ -222,3 +247,20 @@ function handleCellClick(event) {
   cell.appendChild(createMarker(note, interval, displayMode));
 
 }
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+const inst=document.getElementById("instrument")
+
+if(inst){
+
+inst.addEventListener("change",()=>{
+
+build()
+clearGrid()
+
+})
+
+}
+
+})
