@@ -302,44 +302,6 @@ function handleCellClick(event) {
 
 }
 
-function addSequencePoint(cell){
-
-const string = cell.dataset.string
-const fret = cell.dataset.fret
-const note = cell.dataset.note
-
-const order = sequence.length + 1
-
-sequence.push({
-  string:string,
-  fret:fret,
-  note:note,
-  order:order,
-  duration:"8"
-})
-
-}
-
-function removeSequencePoint(cell){
-
-const string = cell.dataset.string
-const fret = cell.dataset.fret
-
-sequence = sequence.filter(n =>
-!(n.string === string && n.fret === fret)
-)
-
-renumberSequence()
-
-}
-
-function renumberSequence(){
-
-sequence.forEach((note,i)=>{
-note.order = i+1
-})
-
-}
 
 document.addEventListener("DOMContentLoaded",()=>{
 
