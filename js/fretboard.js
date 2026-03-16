@@ -153,10 +153,7 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
       grid.appendChild(cell);
     });
   });
-  if (!grid.dataset.clickBound) {
-    grid.addEventListener("click", handleCellClick);
-    grid.dataset.clickBound = "true";
-  }
+  grid.addEventListener("click", handleCellClick);
 
 }
 
