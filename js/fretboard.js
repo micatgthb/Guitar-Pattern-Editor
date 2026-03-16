@@ -302,22 +302,31 @@ createMarker(note,interval,displayMode)
 
 function handleCellClick(event) {
   
-  if(!sequenceMode) return
+ 
   console.log("click detected")
   const cell = event.target.closest(".cell");
   if (!cell) return;
   if (cell.classList.contains("header") || cell.classList.contains("string")) return;
   if (!cell.dataset.note) return;
 
-if (cell.innerHTML.trim() !== "") {
+  if(sequenceMode){
 
- removeSequencePoint(cell)
+  addSequencePoint(cell)
 
-cell.innerHTML = ""
+  const order = sequence.length
 
-refreshMarkerOrders()
-drawSequenceLines()
-  return
+  const marker = createMarker(note, interval, displayMode, order)
+
+  cell.appendChild(marker)
+
+  refreshMarkerOrders()
+  drawSequenceLines()
+
+}else{
+
+  cell.appendChild(
+    createMarker(note, interval, displayMode)
+  )
 
 }
 
