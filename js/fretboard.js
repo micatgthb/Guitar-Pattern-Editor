@@ -80,6 +80,8 @@ function getNote(openNote, fret) {
 
 function build(){
 
+  console.log("build called")
+
 grid = document.getElementById("grid");
 
 const instrument = getInstrument()
