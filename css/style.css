@@ -86,3 +86,10 @@ max-width:100%;
 #grid{
 width:max-content;
 }
+
+/* Bass strings */
+
+.bass-string-1 { border-bottom: 3px solid #888; }
+.bass-string-2 { border-bottom: 4px solid #777; }
+.bass-string-3 { border-bottom: 5px solid #666; }
+.bass-string-4 { border-bottom: 6px solid #555; }
