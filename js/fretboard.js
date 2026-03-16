@@ -151,7 +151,7 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
 
       cell.dataset.note = getNote(tuning[stringName], fret);
       cell.dataset.fret = String(fret);
-      cell.dataset.string = String(stringIndex);
+      cell.dataset.string = String(stringIndex + 1);
 
       grid.appendChild(cell);
     });
