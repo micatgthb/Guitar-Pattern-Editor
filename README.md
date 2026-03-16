@@ -4,8 +4,7 @@ Interactive fretboard tool for exploring scales and patterns on **guitar and bas
 
 ## 🎸 Try the App
 
-👉 **Live version:**  
-https://micatgthb.github.io/Guitar-Pattern-Editor
+[![Open App](https://img.shields.io/badge/Open-App-green?style=for-the-badge)](https://micatgthb.github.io/Guitar-Pattern-Editor)
 
 ## Features
 
