@@ -83,6 +83,7 @@ function build(){
   console.log("build called")
 
 grid = document.getElementById("grid");
+  console.log("grid:", grid)
 
 const instrument = getInstrument()
 const strings = instrument.strings
@@ -156,6 +157,7 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
     });
   });
   grid.addEventListener("click", handleCellClick);
+  console.log("click listener attached")
 
 }
 
@@ -274,6 +276,7 @@ createMarker(note,interval,displayMode)
 }
 
 function handleCellClick(event) {
+  
   console.log("click detected")
   const cell = event.target.closest(".cell");
   if (!cell) return;
@@ -306,6 +309,9 @@ function handleCellClick(event) {
 
 
 document.addEventListener("DOMContentLoaded",()=>{
+
+build()
+applyScale()
 
 const inst=document.getElementById("instrument")
 
