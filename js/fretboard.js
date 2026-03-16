@@ -31,6 +31,19 @@ function nextSequenceNumber(){
   return sequence.length + 1
 }
 
+function updateSequenceButton(){
+
+  btn.classList.toggle("active", sequenceMode)
+  const btn = document.getElementById("sequenceModeBtn")
+
+  if(!btn) return
+
+  btn.textContent = sequenceMode
+  ? "Sequence Mode: ON"
+  : "Sequence Mode: OFF"
+
+}
+
 function addSequencePoint(cell){
 
   const data = {
@@ -416,21 +429,20 @@ const seqBtn = document.getElementById("sequenceModeBtn")
 
 if(seqBtn){
 
-seqBtn.addEventListener("click",()=>{
+  seqBtn.addEventListener("click",()=>{
 
-sequenceMode = !sequenceMode
+    sequenceMode = !sequenceMode
 
-seqBtn.textContent = sequenceMode
-? "Sequence Mode: ON"
-: "Sequence Mode: OFF"
+    updateSequenceButton()
 
-})
+  })
 
 }
 
 build()
 applyScale()
 drawSequenceLines()
+updateSequenceButton()
 
 const inst=document.getElementById("instrument")
 
