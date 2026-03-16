@@ -340,8 +340,6 @@ function drawSequenceLines(){
   svg.style.width = rect.width + "px"
   svg.style.height = rect.height + "px"
   svg.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`)
-  line.setAttribute("stroke", "red")
-  line.setAttribute("stroke-width", "6")
 
   const markers = Array.from(document.querySelectorAll(".dot[data-order]"))
 
