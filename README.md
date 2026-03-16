@@ -8,6 +8,10 @@ Interactive fretboard tool for exploring scales and patterns on **guitar and bas
 The editor allows you to visualize scales, explore interval relationships and
 create custom note patterns directly on the fretboard.
 
+## Demo
+
+![Demo](demo.gif)
+
 ## 🎸 Try the App
 
 [![Open App](https://img.shields.io/badge/Open-App-green?style=for-the-badge)](https://app.guitarpattern.net)
