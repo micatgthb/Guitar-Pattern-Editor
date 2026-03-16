@@ -17,9 +17,10 @@ Interactive fretboard tool for exploring scales and patterns on **guitar and bas
 - Click notes to build patterns
 
 ## Screenshots
-
+Example for guitar with full C-major scale
 <img width="888" height="540" alt="image" src="https://github.com/user-attachments/assets/302a7716-8138-4f7f-a76e-bb3bd2ba0b0d" />
 
+Example for bass with frets 4 to 9 and C#-minor scale
 <img width="898" height="461" alt="image" src="https://github.com/user-attachments/assets/a11f8c5b-7c47-49b2-b42a-c9d1c12cb489" />
 
 ## Usage
