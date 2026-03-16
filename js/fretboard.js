@@ -341,7 +341,7 @@ function drawSequenceLines(){
   svg.style.height = rect.height + "px"
   svg.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`)
 
-  const markers = Array.from(document.querySelectorAll(".dot[data-order]"))
+  const markers = Array.from(grid.querySelectorAll(".dot[data-order]"))
 
   if(markers.length < 2) return
 
@@ -385,6 +385,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 build()
 applyScale()
+drawSequenceLines()
 
 const inst=document.getElementById("instrument")
 
@@ -394,6 +395,7 @@ inst.addEventListener("change",()=>{
 
 build()
 applyScale()
+drawSequenceLines()
 
 })
 
