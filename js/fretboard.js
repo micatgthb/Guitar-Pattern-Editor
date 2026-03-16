@@ -87,11 +87,17 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
     grid.appendChild(h);
   });
 
-  strings.forEach((stringName) => {
-    const label = document.createElement("div");
-    label.className = "cell string";
-    label.textContent = stringName;
-    grid.appendChild(label);
+  strings.forEach((stringName, index) => {
+
+  const label = document.createElement("div");
+  label.className = "cell string";
+  label.textContent = stringName;
+
+  if(instrument === instruments.bass){
+  label.classList.add("bass-string-"+(index+1))
+}
+
+  grid.appendChild(label);
 
     frets.forEach((fret) => {
       const cell = document.createElement("div");
@@ -257,7 +263,7 @@ if(inst){
 inst.addEventListener("change",()=>{
 
 build()
-clearGrid()
+applyScale()
 
 })
 
