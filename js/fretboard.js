@@ -135,7 +135,7 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
   label.textContent = stringName;
 
   if(instrument === instruments.bass){
-  label.classList.add("bass-string-"+(index+1))
+  label.classList.add("bass-string-"+(stringIndex+1))
 }
 
   grid.appendChild(label);
@@ -299,6 +299,8 @@ function handleCellClick(event) {
   cell.appendChild(createMarker(note, interval, displayMode));
   
   addSequencePoint(cell)
+
+  console.log(sequence)
 
 }
 
