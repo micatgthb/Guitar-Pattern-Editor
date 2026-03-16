@@ -275,6 +275,7 @@ createMarker(note,interval,displayMode)
 }
 
 function handleCellClick(event) {
+  console.log("click detected")
   const cell = event.target.closest(".cell");
   if (!cell) return;
   if (cell.classList.contains("header") || cell.classList.contains("string")) return;
