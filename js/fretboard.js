@@ -319,10 +319,11 @@ function handleCellClick(event){
   // Marker entfernen
  if(cell.innerHTML.trim() !== ""){
 
-  cell.innerHTML = ""
-
   if(sequenceMode){
-    removeSequencePoint(cell)
+  removeSequencePoint(cell)
+}
+
+cell.innerHTML = ""
     refreshMarkerOrders()
     drawSequenceLines()
   }
@@ -362,12 +363,6 @@ function drawSequenceLines(){
 
   const svg = document.getElementById("sequenceLayer")
   const grid = document.getElementById("grid")
-
-if(sequenceMode){
-  grid.classList.add("sequence-mode")
-}else{
-  grid.classList.remove("sequence-mode")
-}
 
   if(!svg || !grid) return
 
@@ -449,18 +444,26 @@ const seqBtn = document.getElementById("sequenceModeBtn")
 
 if(seqBtn){
 
-  seqBtn.addEventListener("click",()=>{
+seqBtn.addEventListener("click",()=>{
 
   sequenceMode = !sequenceMode
 
- if(!sequenceMode){
+  const grid = document.getElementById("grid")
 
-  sequence = []
+  if(sequenceMode){
+    grid.classList.add("sequence-mode")
+  }else{
+    grid.classList.remove("sequence-mode")
+  }
 
-  const svg = document.getElementById("sequenceLayer")
-  if(svg) svg.innerHTML = ""
+  if(!sequenceMode){
 
-}
+    sequence = []
+
+    const svg = document.getElementById("sequenceLayer")
+    if(svg) svg.innerHTML = ""
+
+  }
 
   updateSequenceButton()
 
