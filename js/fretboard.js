@@ -24,6 +24,47 @@ const instruments = {
 
 }
 
+let sequence = []
+
+function nextSequenceNumber(){
+  return sequence.length + 1
+}
+
+function addSequencePoint(cell){
+
+  const data = {
+    string: cell.dataset.string,
+    fret: cell.dataset.fret,
+    note: cell.dataset.note,
+    order: nextSequenceNumber(),
+    duration: "8"
+  }
+
+  sequence.push(data)
+
+}
+
+function removeSequencePoint(cell){
+
+  const string = cell.dataset.string
+  const fret = cell.dataset.fret
+
+  sequence = sequence.filter(p =>
+    !(p.string === string && p.fret === fret)
+  )
+
+  renumberSequence()
+
+}
+
+function renumberSequence(){
+
+  sequence.forEach((p,i)=>{
+    p.order = i + 1
+  })
+
+}
+
 function getInstrument(){
   const sel=document.getElementById("instrument")
   if(!sel) return instruments.guitar
@@ -87,7 +128,7 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
     grid.appendChild(h);
   });
 
-  strings.forEach((stringName, index) => {
+  strings.forEach((stringName, stringIndex) => {
 
   const label = document.createElement("div");
   label.className = "cell string";
@@ -107,6 +148,7 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
 
       cell.dataset.note = getNote(tuning[stringName], fret);
       cell.dataset.fret = String(fret);
+      cell.dataset.string = String(stringIndex);
 
       grid.appendChild(cell);
     });
@@ -239,9 +281,13 @@ function handleCellClick(event) {
   if (!cell.dataset.note) return;
 
   if (cell.innerHTML.trim() !== "") {
-    cell.innerHTML = "";
-    return;
-  }
+
+  removeSequencePoint(cell)
+
+  cell.innerHTML = ""
+  return
+
+}
 
   const displayMode = document.getElementById("displayMode").value;
   const root = document.getElementById("root").value;
@@ -251,6 +297,47 @@ function handleCellClick(event) {
   const interval = (noteIndex - rootIndex + 12) % 12;
 
   cell.appendChild(createMarker(note, interval, displayMode));
+  
+  addSequencePoint(cell)
+
+}
+
+function addSequencePoint(cell){
+
+const string = cell.dataset.string
+const fret = cell.dataset.fret
+const note = cell.dataset.note
+
+const order = sequence.length + 1
+
+sequence.push({
+  string:string,
+  fret:fret,
+  note:note,
+  order:order,
+  duration:"8"
+})
+
+}
+
+function removeSequencePoint(cell){
+
+const string = cell.dataset.string
+const fret = cell.dataset.fret
+
+sequence = sequence.filter(n =>
+!(n.string === string && n.fret === fret)
+)
+
+renumberSequence()
+
+}
+
+function renumberSequence(){
+
+sequence.forEach((note,i)=>{
+note.order = i+1
+})
 
 }
 
