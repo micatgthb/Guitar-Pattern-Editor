@@ -296,10 +296,12 @@ function handleCellClick(event) {
 
 if (cell.innerHTML.trim() !== "") {
 
-  removeSequencePoint(cell)
+ removeSequencePoint(cell)
 
-  cell.innerHTML = ""
-  drawSequenceLines()
+cell.innerHTML = ""
+
+refreshMarkerOrders()
+drawSequenceLines()
   return
 
 }
@@ -312,6 +314,7 @@ if (cell.innerHTML.trim() !== "") {
   const interval = (noteIndex - rootIndex + 12) % 12;
 
  addSequencePoint(cell)
+refreshMarkerOrders()
 
 const order = sequence.length
 
@@ -376,6 +379,28 @@ function drawSequenceLines(){
     line.setAttribute("stroke-linecap", "round")
 
     svg.appendChild(line)
+
+  })
+
+}
+
+function refreshMarkerOrders(){
+
+  const markers = document.querySelectorAll("#grid .dot[data-order]")
+
+  markers.forEach(marker=>{
+    const cell = marker.closest(".cell")
+
+    const string = cell.dataset.string
+    const fret = cell.dataset.fret
+
+    const point = sequence.find(p =>
+      p.string === string && p.fret === fret
+    )
+
+    if(point){
+      marker.dataset.order = point.order
+    }
 
   })
 
