@@ -326,7 +326,6 @@ function handleCellClick(event){
 cell.innerHTML = ""
     refreshMarkerOrders()
     drawSequenceLines()
-  }
 
   return
 }
