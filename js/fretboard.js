@@ -25,6 +25,7 @@ const instruments = {
 }
 
 let sequence = []
+let sequenceMode = false
 
 function nextSequenceNumber(){
   return sequence.length + 1
@@ -288,6 +289,7 @@ createMarker(note,interval,displayMode)
 
 function handleCellClick(event) {
   
+  if(!sequenceMode) return
   console.log("click detected")
   const cell = event.target.closest(".cell");
   if (!cell) return;
@@ -328,6 +330,8 @@ console.log(sequence)
 }
 
 function drawSequenceLines(){
+
+  if(!sequenceMode) return
 
   const svg = document.getElementById("sequenceLayer")
   const grid = document.getElementById("grid")
@@ -407,6 +411,22 @@ function refreshMarkerOrders(){
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
+
+const seqBtn = document.getElementById("sequenceModeBtn")
+
+if(seqBtn){
+
+seqBtn.addEventListener("click",()=>{
+
+sequenceMode = !sequenceMode
+
+seqBtn.textContent = sequenceMode
+? "Sequence Mode: ON"
+: "Sequence Mode: OFF"
+
+})
+
+}
 
 build()
 applyScale()
