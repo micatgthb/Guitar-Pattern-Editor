@@ -78,13 +78,30 @@ font-size:16px;
 }
 
 #board-wrapper{
+position:relative;
 overflow-x:auto;
 overflow-y:hidden;
 max-width:100%;
 }
 
+#sequenceLayer{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:2;
+}
+
 #grid{
-width:max-content;
+position:relative;
+z-index:1;
+}
+
+.dot{
+position:relative;
+z-index:3;
 }
 
 /* Bass strings */
