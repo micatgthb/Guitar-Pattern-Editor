@@ -18,7 +18,8 @@ Interactive fretboard tool for exploring scales and patterns on **guitar and bas
 
 ## Screenshots
 
-*(coming soon)*
+<img width="888" height="540" alt="image" src="https://github.com/user-attachments/assets/302a7716-8138-4f7f-a76e-bb3bd2ba0b0d" />
+
 
 ## Usage
 
