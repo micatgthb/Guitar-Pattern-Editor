@@ -161,7 +161,7 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
 
 }
 
-function createMarker(note, interval, displayMode) {
+function createMarker(note, interval, displayMode, order = null) {
   const svgNS = "http://www.w3.org/2000/svg";
 
   const dot = document.createElement("div");
@@ -225,6 +225,9 @@ svg.setAttribute("height","36");
   svg.appendChild(text);
 
   dot.appendChild(svg);
+  if(order !== null){
+  dot.dataset.order = String(order)
+}
   return dot;
 }
 
@@ -233,6 +236,11 @@ function clearGrid() {
   cells.forEach((c) => {
     c.innerHTML = "";
   });
+
+  const svg = document.getElementById("sequenceLayer")
+  if(svg){
+    svg.innerHTML = ""
+  }
 }
 
 function applyScale(){
@@ -283,11 +291,12 @@ function handleCellClick(event) {
   if (cell.classList.contains("header") || cell.classList.contains("string")) return;
   if (!cell.dataset.note) return;
 
-  if (cell.innerHTML.trim() !== "") {
+if (cell.innerHTML.trim() !== "") {
 
   removeSequencePoint(cell)
 
   cell.innerHTML = ""
+  drawSequenceLines()
   return
 
 }
@@ -299,14 +308,73 @@ function handleCellClick(event) {
   const noteIndex = chromatic.indexOf(note);
   const interval = (noteIndex - rootIndex + 12) % 12;
 
-  cell.appendChild(createMarker(note, interval, displayMode));
-  
-  addSequencePoint(cell)
+ addSequencePoint(cell)
 
-  console.log(sequence)
+const order = sequence.length
+
+cell.appendChild(
+  createMarker(note, interval, displayMode, order)
+)
+
+drawSequenceLines()
+console.log(sequence)
 
 }
 
+function drawSequenceLines(){
+
+  const svg = document.getElementById("sequenceLayer")
+  const grid = document.getElementById("grid")
+
+  if(!svg || !grid) return
+
+  svg.innerHTML = ""
+
+  const rect = grid.getBoundingClientRect()
+
+  svg.setAttribute("width", rect.width)
+  svg.setAttribute("height", rect.height)
+  svg.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`)
+
+  const markers = Array.from(document.querySelectorAll(".dot[data-order]"))
+
+  if(markers.length < 2) return
+
+  markers.sort((a,b) => Number(a.dataset.order) - Number(b.dataset.order))
+
+  const gridRect = grid.getBoundingClientRect()
+
+  markers.forEach((marker, i) => {
+
+    if(i === markers.length - 1) return
+
+    const next = markers[i + 1]
+
+    const a = marker.getBoundingClientRect()
+    const b = next.getBoundingClientRect()
+
+    const x1 = a.left - gridRect.left + a.width / 2
+    const y1 = a.top - gridRect.top + a.height / 2
+
+    const x2 = b.left - gridRect.left + b.width / 2
+    const y2 = b.top - gridRect.top + b.height / 2
+
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
+
+    line.setAttribute("x1", x1)
+    line.setAttribute("y1", y1)
+    line.setAttribute("x2", x2)
+    line.setAttribute("y2", y2)
+
+    line.setAttribute("stroke", "#666")
+    line.setAttribute("stroke-width", "2")
+    line.setAttribute("stroke-linecap", "round")
+
+    svg.appendChild(line)
+
+  })
+
+}
 
 document.addEventListener("DOMContentLoaded",()=>{
 
