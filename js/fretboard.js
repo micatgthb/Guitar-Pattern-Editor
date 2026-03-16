@@ -317,17 +317,18 @@ function handleCellClick(event){
   const interval = (noteIndex - rootIndex + 12) % 12
 
   // Marker entfernen
-  if(cell.innerHTML.trim() !== ""){
+ if(cell.innerHTML.trim() !== ""){
 
-    if(sequenceMode){
-      removeSequencePoint(cell)
-      refreshMarkerOrders()
-      drawSequenceLines()
-    }
+  cell.innerHTML = ""
 
-    cell.innerHTML = ""
-    return
+  if(sequenceMode){
+    removeSequencePoint(cell)
+    refreshMarkerOrders()
+    drawSequenceLines()
   }
+
+  return
+}
 
   // Sequence Mode
   if(sequenceMode){
@@ -361,6 +362,12 @@ function drawSequenceLines(){
 
   const svg = document.getElementById("sequenceLayer")
   const grid = document.getElementById("grid")
+
+if(sequenceMode){
+  grid.classList.add("sequence-mode")
+}else{
+  grid.classList.remove("sequence-mode")
+}
 
   if(!svg || !grid) return
 
@@ -446,10 +453,14 @@ if(seqBtn){
 
   sequenceMode = !sequenceMode
 
-  if(!sequenceMode){
-    const svg = document.getElementById("sequenceLayer")
-    if(svg) svg.innerHTML = ""
-  }
+ if(!sequenceMode){
+
+  sequence = []
+
+  const svg = document.getElementById("sequenceLayer")
+  if(svg) svg.innerHTML = ""
+
+}
 
   updateSequenceButton()
 
