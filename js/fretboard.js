@@ -317,15 +317,18 @@ function handleCellClick(event){
   const interval = (noteIndex - rootIndex + 12) % 12
 
   // Marker entfernen
- if(cell.innerHTML.trim() !== ""){
+if(cell.innerHTML.trim() !== ""){
 
   if(sequenceMode){
-  removeSequencePoint(cell)
-}
+    removeSequencePoint(cell)
+  }
 
-cell.innerHTML = ""
+  cell.innerHTML = ""
+
+  if(sequenceMode){
     refreshMarkerOrders()
     drawSequenceLines()
+  }
 
   return
 }
