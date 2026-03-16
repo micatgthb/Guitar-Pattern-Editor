@@ -111,6 +111,10 @@ background:#2c7be5;
 color:white;
 }
 
+#grid.sequence-mode .cell {
+  cursor: crosshair;
+}
+
 /* Bass strings */
 
 .bass-string-1 { border-bottom: 3px solid #888; }
