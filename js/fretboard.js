@@ -314,14 +314,14 @@ drawSequenceLines()
   const interval = (noteIndex - rootIndex + 12) % 12;
 
  addSequencePoint(cell)
-refreshMarkerOrders()
 
 const order = sequence.length
 
-cell.appendChild(
-  createMarker(note, interval, displayMode, order)
-)
+const marker = createMarker(note, interval, displayMode, order)
 
+cell.appendChild(marker)
+
+refreshMarkerOrders()
 drawSequenceLines()
 console.log(sequence)
 
