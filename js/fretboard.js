@@ -33,10 +33,10 @@ function nextSequenceNumber(){
 
 function updateSequenceButton(){
 
-  btn.classList.toggle("active", sequenceMode)
   const btn = document.getElementById("sequenceModeBtn")
-
   if(!btn) return
+
+  btn.classList.toggle("active", sequenceMode)
 
   btn.textContent = sequenceMode
   ? "Sequence Mode: ON"
@@ -300,57 +300,61 @@ createMarker(note,interval,displayMode)
 
 }
 
-function handleCellClick(event) {
-  
- 
-  console.log("click detected")
-  const cell = event.target.closest(".cell");
-  if (!cell) return;
-  if (cell.classList.contains("header") || cell.classList.contains("string")) return;
-  if (!cell.dataset.note) return;
+function handleCellClick(event){
 
+  const cell = event.target.closest(".cell")
+  if(!cell) return
+  if(cell.classList.contains("header")) return
+  if(cell.classList.contains("string")) return
+  if(!cell.dataset.note) return
+
+  const displayMode = document.getElementById("displayMode").value
+  const root = document.getElementById("root").value
+  const rootIndex = chromatic.indexOf(root)
+
+  const note = cell.dataset.note
+  const noteIndex = chromatic.indexOf(note)
+  const interval = (noteIndex - rootIndex + 12) % 12
+
+  // Marker entfernen
+  if(cell.innerHTML.trim() !== ""){
+
+    if(sequenceMode){
+      removeSequencePoint(cell)
+      refreshMarkerOrders()
+      drawSequenceLines()
+    }
+
+    cell.innerHTML = ""
+    return
+  }
+
+  // Sequence Mode
   if(sequenceMode){
 
-  addSequencePoint(cell)
+    addSequencePoint(cell)
 
-  const order = sequence.length
+    const order = sequence.length
 
-  const marker = createMarker(note, interval, displayMode, order)
+    const marker = createMarker(note, interval, displayMode, order)
 
-  cell.appendChild(marker)
+    cell.appendChild(marker)
 
-  refreshMarkerOrders()
-  drawSequenceLines()
+    refreshMarkerOrders()
+    drawSequenceLines()
 
-}else{
+  }
 
-  cell.appendChild(
-    createMarker(note, interval, displayMode)
-  )
+  // Normal Mode
+  else{
 
-}
+    const marker = createMarker(note, interval, displayMode)
 
-  const displayMode = document.getElementById("displayMode").value;
-  const root = document.getElementById("root").value;
-  const rootIndex = chromatic.indexOf(root);
-  const note = cell.dataset.note;
-  const noteIndex = chromatic.indexOf(note);
-  const interval = (noteIndex - rootIndex + 12) % 12;
+    cell.appendChild(marker)
 
- addSequencePoint(cell)
-
-const order = sequence.length
-
-const marker = createMarker(note, interval, displayMode, order)
-
-cell.appendChild(marker)
-
-refreshMarkerOrders()
-drawSequenceLines()
-console.log(sequence)
+  }
 
 }
-
 function drawSequenceLines(){
 
   if(!sequenceMode) return
@@ -440,11 +444,16 @@ if(seqBtn){
 
   seqBtn.addEventListener("click",()=>{
 
-    sequenceMode = !sequenceMode
+  sequenceMode = !sequenceMode
 
-    updateSequenceButton()
+  if(!sequenceMode){
+    const svg = document.getElementById("sequenceLayer")
+    if(svg) svg.innerHTML = ""
+  }
 
-  })
+  updateSequenceButton()
+
+})
 
 }
 
