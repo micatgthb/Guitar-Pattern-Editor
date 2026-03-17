@@ -79,6 +79,26 @@ function renumberSequence(){
 
 }
 
+function clearSequence(){
+
+  // Daten zurücksetzen
+  sequence = []
+
+  // Alle Order-Markierungen entfernen
+  const markers = document.querySelectorAll("#grid .dot[data-order]")
+
+  markers.forEach(marker=>{
+    delete marker.dataset.order
+  })
+
+  // Linien löschen
+  const svg = document.getElementById("sequenceLayer")
+  if(svg){
+    svg.innerHTML = ""
+  }
+
+}
+
 function getInstrument(){
   const sel=document.getElementById("instrument")
   if(!sel) return instruments.guitar
@@ -472,10 +492,23 @@ seqBtn.addEventListener("click",()=>{
     if(svg) svg.innerHTML = ""
 
   }
+  
 
   updateSequenceButton()
 
 })
+
+}
+
+  const clearBtn = document.getElementById("clearSequenceBtn")
+
+if(clearBtn){
+
+  clearBtn.addEventListener("click", ()=>{
+
+    clearSequence()
+
+  })
 
 }
 
