@@ -80,26 +80,17 @@ function renumberSequence(){
 }
 
 function clearSequence(){
-
   sequence = []
 
-  const markers = document.querySelectorAll("#grid .dot")
-
-  markers.forEach(marker=>{
+  document.querySelectorAll("#grid .dot").forEach(marker => {
     delete marker.dataset.order
+    marker.querySelectorAll(".order-label").forEach(el => el.remove())
   })
 
   const svg = document.getElementById("sequenceLayer")
   if(svg){
     svg.innerHTML = ""
   }
-
-  document.querySelectorAll(".order-label").forEach(el=>el.remove())
-
-  // 👉 wichtig!
-  refreshMarkerOrders()
-  drawSequenceLines()
-
 }
 
 function getInstrument(){
@@ -353,37 +344,14 @@ function handleCellClick(event){
   const existingMarker = cell.querySelector(".dot")
   const existingOrder = existingMarker?.dataset.order
 
-  // =========================
-  // 🎯 SEQUENCE MODE
-  // =========================
   if(sequenceMode){
 
-    // ❌ kein Marker → nichts tun
     if(!existingMarker) return
 
-    // ➕ Marker hat noch keine Sequenz → hinzufügen
     if(!existingOrder){
-
-  addSequencePoint(cell)
-
-  // 👉 Order IMMER aus sequence holen
-  const point = sequence.find(p =>
-    p.string === cell.dataset.string &&
-    p.fret === cell.dataset.fret
-  )
-
-  if(point){
-    existingMarker.dataset.order = point.order
-  }
-
-}
-
-    // ➖ Marker ist schon Teil der Sequenz → entfernen
-    else{
-
+      addSequencePoint(cell)
+    } else {
       removeSequencePoint(cell)
-      delete existingMarker.dataset.order
-
     }
 
     refreshMarkerOrders()
@@ -391,20 +359,13 @@ function handleCellClick(event){
     return
   }
 
-  // =========================
-  // 🎯 NORMAL MODE
-  // =========================
-
-  // Marker entfernen
   if(existingMarker){
     cell.innerHTML = ""
     return
   }
 
-  // Marker setzen
   const marker = createMarker(note, interval, displayMode)
   cell.appendChild(marker)
-
 }
 
 function drawSequenceLines(){
@@ -470,9 +431,9 @@ function refreshMarkerOrders(){
 
   const markers = document.querySelectorAll("#grid .dot")
 
-  markers.forEach(marker=>{
-
+  markers.forEach(marker => {
     const cell = marker.closest(".cell")
+    if(!cell) return
 
     const string = cell.dataset.string
     const fret = cell.dataset.fret
@@ -481,89 +442,69 @@ function refreshMarkerOrders(){
       p.string === string && p.fret === fret
     )
 
-    // 🧹 alte Labels IMMER entfernen
-    marker.querySelectorAll(".order-label").forEach(el=>el.remove())
+    marker.querySelectorAll(".order-label").forEach(el => el.remove())
 
     if(point){
-
-      marker.dataset.order = point.order
+      marker.dataset.order = String(point.order)
 
       const label = document.createElement("div")
       label.className = "order-label"
       label.textContent = point.order
-
       marker.appendChild(label)
-
-    }else{
+    } else {
       delete marker.dataset.order
     }
-
   })
-
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-const seqBtn = document.getElementById("sequenceModeBtn")
-const clearBtn = document.getElementById("clearSequenceBtn")
+  const seqBtn = document.getElementById("sequenceModeBtn")
+  const clearBtn = document.getElementById("clearSequenceBtn")
+  const inst = document.getElementById("instrument")
 
-if(seqBtn){
+  if(seqBtn){
+    seqBtn.addEventListener("click", (e) => {
+      e.preventDefault()
 
-  seqBtn.addEventListener("click",()=>{
+      sequenceMode = !sequenceMode
 
-    sequenceMode = !sequenceMode
+      const grid = document.getElementById("grid")
+      if(grid){
+        grid.classList.toggle("sequence-mode", sequenceMode)
+      }
 
-    const grid = document.getElementById("grid")
+      if(!sequenceMode){
+        clearSequence()
+      }
 
-    if(sequenceMode){
-      grid.classList.add("sequence-mode")
-    }else{
-      grid.classList.remove("sequence-mode")
-    }
+      updateSequenceButton()
 
-if(!sequenceMode){
-  clearSequence()
-}
+      if(clearBtn){
+        clearBtn.disabled = !sequenceMode
+      }
+    })
+  }
 
-    updateSequenceButton()
+  if(clearBtn){
+    clearBtn.disabled = !sequenceMode
 
-    if(clearBtn){
-      clearBtn.disabled = !sequenceMode
-    }
+    clearBtn.addEventListener("click", (e) => {
+      e.preventDefault()
+      clearSequence()
+    })
+  }
 
-  })
+  build()
+  applyScale()
+  drawSequenceLines()
+  updateSequenceButton()
 
-}
-
-if(clearBtn){
-
-  clearBtn.disabled = !sequenceMode
-
-  clearBtn.addEventListener("click", ()=>{
-
-    clearSequence()
-
-  })
-
-}
-
-build()
-applyScale()
-drawSequenceLines()
-updateSequenceButton()
-
-const inst = document.getElementById("instrument")
-
-if(inst){
-
-  inst.addEventListener("change",()=>{
-
-    build()
-    applyScale()
-    drawSequenceLines()
-
-  })
-
-}
-
+  if(inst){
+    inst.addEventListener("change",()=>{
+      build()
+      applyScale()
+      drawSequenceLines()
+    })
+  }
 })
