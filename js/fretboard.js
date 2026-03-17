@@ -94,6 +94,8 @@ function clearSequence(){
     svg.innerHTML = ""
   }
 
+  document.querySelectorAll(".order-label").forEach(el=>el.remove())
+
   // 👉 wichtig!
   refreshMarkerOrders()
   drawSequenceLines()
@@ -483,6 +485,20 @@ function refreshMarkerOrders(){
     }
 
   })
+  // alte Labels entfernen
+marker.querySelectorAll(".order-label").forEach(el=>el.remove())
+
+  if(point){
+
+  marker.dataset.order = point.order
+
+  const label = document.createElement("div")
+  label.className = "order-label"
+  label.textContent = point.order
+
+  marker.appendChild(label)
+
+}
 
 }
 
