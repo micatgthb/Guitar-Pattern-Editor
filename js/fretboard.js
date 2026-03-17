@@ -68,14 +68,33 @@ function startPlayback(){
   if(sequence.length === 0) return
 
   const bpm = parseInt(document.getElementById("bpm")?.value || 80)
-
   const seq = getSortedSequence()
 
   playbackIndex = 0
 
-  if(playbackInterval){
-    clearInterval(playbackInterval)
+  stopPlayback() // sicherheitshalber
+
+  function playNext(){
+
+    const step = seq[playbackIndex]
+    if(!step) return
+
+    const freq = noteToFreq(step.note)
+    const durationMs = getDurationMs(step.duration, bpm)
+
+    playTone(freq, durationMs / 1000)
+
+    playbackIndex++
+    if(playbackIndex >= seq.length){
+      playbackIndex = 0 // LOOP
+    }
+
+    playbackInterval = setTimeout(playNext, durationMs)
+
   }
+
+  playNext()
+}
 
   function playStep(){
 
