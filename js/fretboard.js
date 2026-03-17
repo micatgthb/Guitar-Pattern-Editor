@@ -316,47 +316,53 @@ function handleCellClick(event){
   const noteIndex = chromatic.indexOf(note)
   const interval = (noteIndex - rootIndex + 12) % 12
 
+  const existingMarker = cell.querySelector(".dot")
+  const existingOrder = existingMarker?.dataset.order
+
+  // =========================
+  // 🎯 SEQUENCE MODE
+  // =========================
+  if(sequenceMode){
+
+    // ❌ kein Marker → nichts tun
+    if(!existingMarker) return
+
+    // ➕ Marker hat noch keine Sequenz → hinzufügen
+    if(!existingOrder){
+
+      addSequencePoint(cell)
+
+      const order = sequence.length
+      existingMarker.dataset.order = order
+
+    }
+
+    // ➖ Marker ist schon Teil der Sequenz → entfernen
+    else{
+
+      removeSequencePoint(cell)
+      delete existingMarker.dataset.order
+
+    }
+
+    refreshMarkerOrders()
+    drawSequenceLines()
+    return
+  }
+
+  // =========================
+  // 🎯 NORMAL MODE
+  // =========================
+
   // Marker entfernen
-if(cell.innerHTML.trim() !== ""){
-
-  if(sequenceMode){
-    removeSequencePoint(cell)
+  if(existingMarker){
+    cell.innerHTML = ""
+    return
   }
 
-  cell.innerHTML = ""
-
-  if(sequenceMode){
-    refreshMarkerOrders()
-    drawSequenceLines()
-  }
-
-  return
-}
-
-  // Sequence Mode
-  if(sequenceMode){
-
-    addSequencePoint(cell)
-
-    const order = sequence.length
-
-    const marker = createMarker(note, interval, displayMode, order)
-
-    cell.appendChild(marker)
-
-    refreshMarkerOrders()
-    drawSequenceLines()
-
-  }
-
-  // Normal Mode
-  else{
-
-    const marker = createMarker(note, interval, displayMode)
-
-    cell.appendChild(marker)
-
-  }
+  // Marker setzen
+  const marker = createMarker(note, interval, displayMode)
+  cell.appendChild(marker)
 
 }
 function drawSequenceLines(){
