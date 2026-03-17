@@ -468,9 +468,10 @@ function drawSequenceLines(){
 
 function refreshMarkerOrders(){
 
-  const markers = document.querySelectorAll("#grid .dot[data-order]")
+  const markers = document.querySelectorAll("#grid .dot")
 
   markers.forEach(marker=>{
+
     const cell = marker.closest(".cell")
 
     const string = cell.dataset.string
@@ -480,25 +481,24 @@ function refreshMarkerOrders(){
       p.string === string && p.fret === fret
     )
 
+    // 🧹 alte Labels IMMER entfernen
+    marker.querySelectorAll(".order-label").forEach(el=>el.remove())
+
     if(point){
+
       marker.dataset.order = point.order
+
+      const label = document.createElement("div")
+      label.className = "order-label"
+      label.textContent = point.order
+
+      marker.appendChild(label)
+
+    }else{
+      delete marker.dataset.order
     }
 
   })
-  // alte Labels entfernen
-marker.querySelectorAll(".order-label").forEach(el=>el.remove())
-
-  if(point){
-
-  marker.dataset.order = point.order
-
-  const label = document.createElement("div")
-  label.className = "order-label"
-  label.textContent = point.order
-
-  marker.appendChild(label)
-
-}
 
 }
 
