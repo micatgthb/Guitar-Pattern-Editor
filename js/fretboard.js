@@ -119,10 +119,10 @@ function getSortedSequence(){
 
 function getDurationMs(duration, bpm){
 
-  // einfache Mapping-Logik
   const beat = 60000 / bpm
 
   switch(duration){
+    case "2": return beat * 2
     case "4": return beat
     case "8": return beat / 2
     case "16": return beat / 4
@@ -145,16 +145,17 @@ function updateSequenceButton(){
 
 function addSequencePoint(cell){
 
+  const duration = document.getElementById("durationSelect")?.value || "8"
+
   const data = {
     string: cell.dataset.string,
     fret: cell.dataset.fret,
     note: cell.dataset.note,
     order: nextSequenceNumber(),
-    duration: "8"
+    duration: duration
   }
 
   sequence.push(data)
-
 }
 
 function removeSequencePoint(cell){
