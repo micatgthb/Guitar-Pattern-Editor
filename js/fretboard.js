@@ -266,6 +266,17 @@ svg.setAttribute("height","36");
   if(order !== null){
   dot.dataset.order = String(order)
 }
+  
+if(order !== null){
+
+  const orderLabel = document.createElement("div")
+  orderLabel.className = "order-label"
+  orderLabel.textContent = order
+
+  dot.appendChild(orderLabel)
+
+}
+  
   return dot;
 }
 
