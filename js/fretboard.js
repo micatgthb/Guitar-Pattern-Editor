@@ -386,7 +386,7 @@ function clearGrid() {
 
 function applyScale(){
 
-  stopPlayback()
+stopPlayback()
 clearGrid()
 
 const root = document.getElementById("root").value
@@ -566,6 +566,29 @@ document.addEventListener("DOMContentLoaded",()=>{
   const playBtn = document.getElementById("playBtn")
   const stopBtn = document.getElementById("stopBtn")
 
+  const scaleSelect = document.getElementById("scale")
+
+if(scaleSelect){
+  scaleSelect.addEventListener("change", ()=>{
+
+    stopPlayback()   // wichtig!
+
+    applyScale()
+    drawSequenceLines()
+
+  })
+}
+
+const rootSelect = document.getElementById("root")
+
+if(rootSelect){
+  rootSelect.addEventListener("change", ()=>{
+    stopPlayback()
+    applyScale()
+    drawSequenceLines()
+  })
+}
+
 if(playBtn){
   playBtn.addEventListener("click", ()=>{
     startPlayback()
@@ -617,6 +640,7 @@ if(stopBtn){
 
   if(inst){
     inst.addEventListener("change",()=>{
+      stopPlayback()
       build()
       applyScale()
       drawSequenceLines()
