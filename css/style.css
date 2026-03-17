@@ -22,6 +22,11 @@ button{
 padding:5px 10px;
 }
 
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 #grid{
 display:grid;
 grid-auto-rows:52px;
