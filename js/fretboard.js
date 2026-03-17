@@ -97,6 +97,10 @@ function clearSequence(){
     svg.innerHTML = ""
   }
 
+  // 👉 wichtig!
+  refreshMarkerOrders()
+  drawSequenceLines()
+
 }
 
 function getInstrument(){
@@ -496,6 +500,10 @@ seqBtn.addEventListener("click",()=>{
 
   updateSequenceButton()
 
+  if(clearBtn){
+  clearBtn.disabled = !sequenceMode
+}
+
 })
 
 }
@@ -503,13 +511,7 @@ seqBtn.addEventListener("click",()=>{
   const clearBtn = document.getElementById("clearSequenceBtn")
 
 if(clearBtn){
-
-  clearBtn.addEventListener("click", ()=>{
-
-    clearSequence()
-
-  })
-
+  clearBtn.disabled = !sequenceMode
 }
 
 build()
