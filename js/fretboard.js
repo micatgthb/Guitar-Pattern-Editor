@@ -386,6 +386,7 @@ function clearGrid() {
 
 function applyScale(){
 
+  stopPlayback()
 clearGrid()
 
 const root = document.getElementById("root").value
