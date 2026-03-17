@@ -23,12 +23,119 @@ const instruments = {
   }
 
 }
+const noteToFreqMap = {
+  C:261.63, "C#":277.18, D:293.66, "D#":311.13,
+  E:329.63, F:349.23, "F#":369.99, G:392.00,
+  "G#":415.30, A:440.00, "A#":466.16, B:493.88
+}
+
+function noteToFreq(note){
+  return noteToFreqMap[note] || 440
+}
+
+let audioCtx = null
+
+function getAudioContext(){
+  if(!audioCtx){
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+  }
+  return audioCtx
+}
+
+function playTone(freq, duration = 0.3){
+
+  const ctx = getAudioContext()
+
+  const osc = ctx.createOscillator()
+  const gain = ctx.createGain()
+
+  osc.type = "sine"
+  osc.frequency.value = freq
+
+  gain.gain.setValueAtTime(0.001, ctx.currentTime)
+  gain.gain.exponentialRampToValueAtTime(0.3, ctx.currentTime + 0.01)
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration)
+
+  osc.connect(gain)
+  gain.connect(ctx.destination)
+
+  osc.start()
+  osc.stop(ctx.currentTime + duration)
+}
+
+function startPlayback(){
+
+  if(sequence.length === 0) return
+
+  const bpm = parseInt(document.getElementById("bpm")?.value || 80)
+
+  const seq = getSortedSequence()
+
+  playbackIndex = 0
+
+  if(playbackInterval){
+    clearInterval(playbackInterval)
+  }
+
+  function playStep(){
+
+    const step = seq[playbackIndex]
+
+    if(!step) return
+
+    const freq = noteToFreq(step.note)
+    const duration = getDurationMs(step.duration, bpm)
+
+    playTone(freq, duration / 1000)
+
+    playbackIndex++
+
+    if(playbackIndex >= seq.length){
+      playbackIndex = 0 // LOOP
+    }
+
+  }
+
+  playStep()
+
+  playbackInterval = setInterval(()=>{
+    playStep()
+  }, getDurationMs(seq[0].duration, bpm))
+
+}
+
+function stopPlayback(){
+  if(playbackInterval){
+    clearInterval(playbackInterval)
+    playbackInterval = null
+  }
+}
 
 let sequence = []
 let sequenceMode = false
 
 function nextSequenceNumber(){
   return sequence.length + 1
+}
+
+let playbackInterval = null
+let playbackIndex = 0
+
+function getSortedSequence(){
+  return [...sequence].sort((a,b)=>a.order - b.order)
+}
+
+function getDurationMs(duration, bpm){
+
+  // einfache Mapping-Logik
+  const beat = 60000 / bpm
+
+  switch(duration){
+    case "4": return beat
+    case "8": return beat / 2
+    case "16": return beat / 4
+    default: return beat / 2
+  }
 }
 
 function updateSequenceButton(){
@@ -462,6 +569,21 @@ document.addEventListener("DOMContentLoaded",()=>{
   const seqBtn = document.getElementById("sequenceModeBtn")
   const clearBtn = document.getElementById("clearSequenceBtn")
   const inst = document.getElementById("instrument")
+
+  const playBtn = document.getElementById("playBtn")
+  const stopBtn = document.getElementById("stopBtn")
+
+if(playBtn){
+  playBtn.addEventListener("click", ()=>{
+    startPlayback()
+  })
+}
+
+if(stopBtn){
+  stopBtn.addEventListener("click", ()=>{
+    stopPlayback()
+  })
+}
 
   if(seqBtn){
     seqBtn.addEventListener("click", (e) => {
