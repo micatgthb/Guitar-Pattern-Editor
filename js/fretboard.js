@@ -81,17 +81,14 @@ function renumberSequence(){
 
 function clearSequence(){
 
-  // Daten zurücksetzen
   sequence = []
 
-  // Alle Order-Markierungen entfernen
-  const markers = document.querySelectorAll("#grid .dot[data-order]")
+  const markers = document.querySelectorAll("#grid .dot")
 
   markers.forEach(marker=>{
     delete marker.dataset.order
   })
 
-  // Linien löschen
   const svg = document.getElementById("sequenceLayer")
   if(svg){
     svg.innerHTML = ""
@@ -354,12 +351,19 @@ function handleCellClick(event){
     // ➕ Marker hat noch keine Sequenz → hinzufügen
     if(!existingOrder){
 
-      addSequencePoint(cell)
+  addSequencePoint(cell)
 
-      const order = sequence.length
-      existingMarker.dataset.order = order
+  // 👉 Order IMMER aus sequence holen
+  const point = sequence.find(p =>
+    p.string === cell.dataset.string &&
+    p.fret === cell.dataset.fret
+  )
 
-    }
+  if(point){
+    existingMarker.dataset.order = point.order
+  }
+
+}
 
     // ➖ Marker ist schon Teil der Sequenz → entfernen
     else{
@@ -389,6 +393,7 @@ function handleCellClick(event){
   cell.appendChild(marker)
 
 }
+
 function drawSequenceLines(){
 
   if(!sequenceMode) return
