@@ -96,36 +96,9 @@ function startPlayback(){
   playNext()
 }
 
-  function playStep(){
-
-    const step = seq[playbackIndex]
-
-    if(!step) return
-
-    const freq = noteToFreq(step.note)
-    const duration = getDurationMs(step.duration, bpm)
-
-    playTone(freq, duration / 1000)
-
-    playbackIndex++
-
-    if(playbackIndex >= seq.length){
-      playbackIndex = 0 // LOOP
-    }
-
-  }
-
-  playStep()
-
-  playbackInterval = setInterval(()=>{
-    playStep()
-  }, getDurationMs(seq[0].duration, bpm))
-
-}
-
 function stopPlayback(){
   if(playbackInterval){
-    clearInterval(playbackInterval)
+    clearTimeout(playbackInterval)
     playbackInterval = null
   }
 }
