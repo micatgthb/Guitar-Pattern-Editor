@@ -478,45 +478,46 @@ function refreshMarkerOrders(){
 document.addEventListener("DOMContentLoaded",()=>{
 
 const seqBtn = document.getElementById("sequenceModeBtn")
+const clearBtn = document.getElementById("clearSequenceBtn")
 
 if(seqBtn){
 
-seqBtn.addEventListener("click",()=>{
+  seqBtn.addEventListener("click",()=>{
 
-  sequenceMode = !sequenceMode
+    sequenceMode = !sequenceMode
 
-  const grid = document.getElementById("grid")
+    const grid = document.getElementById("grid")
 
-  if(sequenceMode){
-    grid.classList.add("sequence-mode")
-  }else{
-    grid.classList.remove("sequence-mode")
-  }
+    if(sequenceMode){
+      grid.classList.add("sequence-mode")
+    }else{
+      grid.classList.remove("sequence-mode")
+    }
 
-  if(!sequenceMode){
-
-    sequence = []
-
-    const svg = document.getElementById("sequenceLayer")
-    if(svg) svg.innerHTML = ""
-
-  }
-  
-
-  updateSequenceButton()
-
-  if(clearBtn){
-  clearBtn.disabled = !sequenceMode
+if(!sequenceMode){
+  clearSequence()
 }
 
-})
+    updateSequenceButton()
+
+    if(clearBtn){
+      clearBtn.disabled = !sequenceMode
+    }
+
+  })
 
 }
-
-  const clearBtn = document.getElementById("clearSequenceBtn")
 
 if(clearBtn){
+
   clearBtn.disabled = !sequenceMode
+
+  clearBtn.addEventListener("click", ()=>{
+
+    clearSequence()
+
+  })
+
 }
 
 build()
@@ -524,17 +525,17 @@ applyScale()
 drawSequenceLines()
 updateSequenceButton()
 
-const inst=document.getElementById("instrument")
+const inst = document.getElementById("instrument")
 
 if(inst){
 
-inst.addEventListener("change",()=>{
+  inst.addEventListener("change",()=>{
 
-build()
-applyScale()
-drawSequenceLines()
+    build()
+    applyScale()
+    drawSequenceLines()
 
-})
+  })
 
 }
 
