@@ -154,7 +154,7 @@ background:#111;
 
 .fret-marker-global{
   position:absolute;
-  transform:translate(-50%, -50%);
+  transform:none;
   z-index:1; /* unter Saiten */
 
   width:18px;
