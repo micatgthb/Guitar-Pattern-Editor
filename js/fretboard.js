@@ -576,7 +576,7 @@ function drawStrings(){
 
   svg.innerHTML = ""
 
-  const wrapperRect = wrapper.getBoundingClientRect()
+  const gridRect = grid.getBoundingClientRect()
 
   svg.setAttribute("viewBox", `0 0 ${wrapperRect.width} ${wrapperRect.height}`)
 
@@ -586,12 +586,14 @@ function drawStrings(){
 
     const r = label.getBoundingClientRect()
 
-    const y = r.top - wrapperRect.top + r.height / 2
+    const y = r.top - gridRect.top + r.height / 2
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
 
     line.setAttribute("x1", 0)
-    line.setAttribute("x2", wrapperRect.width)
+
+    svg.setAttribute("width", rect.width)
+    svg.setAttribute("height", rect.height)
 
     line.setAttribute("y1", y)
     line.setAttribute("y2", y)
