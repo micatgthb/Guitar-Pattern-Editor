@@ -673,6 +673,7 @@ function loadPattern(name){
   if(!raw) return
 
   const data = JSON.parse(raw)
+  clearSequence() // 👉 GANZ wichtig!
 
   sequence = data.sequence || []
 
