@@ -578,6 +578,8 @@ function savePattern(){
 
 function loadPattern(name){
 
+  stopPlayback()   // 👉 HIER hinzufügen
+
   const raw = localStorage.getItem("pattern_" + name)
   if(!raw) return
 
