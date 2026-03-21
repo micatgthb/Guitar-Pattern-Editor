@@ -141,17 +141,19 @@ button:disabled{
 
 /* ===== SVG LAYER ===== */
 
-/* Saiten */
+/* Saite */
+/* ===== STRINGS (echte durchgehende Linien) ===== */
+
 .cell{
   position:relative;
 }
 
-/* Saite */
-.cell::after{
+/* Saite nur auf echten Spielzellen */
+.cell.string-line::after{
   content:"";
   position:absolute;
-  left:0;
-  right:0;
+  left:-2px;
+  right:-2px;
   top:50%;
   transform:translateY(-50%);
 
@@ -167,10 +169,10 @@ button:disabled{
   z-index:2;
 }
 
-/* keine Saiten in Header & Label */
-.cell.header::after,
-.cell.string::after{
-  display:none;
+/* Marker darüber */
+.dot{
+  position:relative;
+  z-index:2;
 }
 
 /* Sequenzlinien */
