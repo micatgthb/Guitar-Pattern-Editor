@@ -47,7 +47,7 @@ cursor:not-allowed;
   display:grid;
   grid-auto-rows:52px;
   outline:3px solid blue;
-  gap:2px;
+  gap:0px;
 
   position:relative;
   z-index:10;
