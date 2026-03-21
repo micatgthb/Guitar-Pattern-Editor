@@ -276,6 +276,7 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
       cell.className = "cell";
 
       cell.classList.add("string-line");
+      cell.classList.add("string-" + stringIndex);
       
       if (fret === 0) cell.classList.add("nut");
 
