@@ -143,27 +143,27 @@ gap:6px;
 }
 
 /* ===== SAITEN ===== */
-
 .cell.string-line::after{
-content:"";
-position:absolute;
+  content:"";
+  position:absolute;
 
-left:-2px;
-right:-2px;
+  left:-2px;
+  right:-2px;
 
-top:50%;
-transform:translateY(-50%);
+  top:50%;
+  transform:translateY(-50%);
 
-background: linear-gradient(
-to bottom,
-#fff,
-#bbb,
-#777,
-#bbb,
-#fff
-);
+  background: linear-gradient(
+    to bottom,
+    #ffffff,
+    #dddddd,
+    #888888,
+    #444444
+  );
 
-z-index:1;
+  box-shadow: 0 0 2px rgba(255,255,255,0.6);
+
+  z-index:2;
 }
 
 /* echte Saitendicken (oben dünn → unten dick) */
