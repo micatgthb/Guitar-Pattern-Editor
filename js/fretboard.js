@@ -648,3 +648,69 @@ if(stopBtn){
     })
   }
 })
+
+function savePattern(){
+
+  const name = prompt("Name des Patterns?")
+  if(!name) return
+
+  const data = {
+    sequence: sequence,
+    instrument: document.getElementById("instrument")?.value,
+    root: document.getElementById("root")?.value,
+    scale: document.getElementById("scale")?.value,
+    bpm: document.getElementById("bpm")?.value
+  }
+
+  localStorage.setItem("pattern_" + name, JSON.stringify(data))
+
+  alert("Gespeichert: " + name)
+}
+
+function loadPattern(name){
+
+  const raw = localStorage.getItem("pattern_" + name)
+  if(!raw) return
+
+  const data = JSON.parse(raw)
+
+  sequence = data.sequence || []
+
+  // UI wiederherstellen
+  if(data.instrument){
+    document.getElementById("instrument").value = data.instrument
+  }
+
+  if(data.root){
+    document.getElementById("root").value = data.root
+  }
+
+  if(data.scale){
+    document.getElementById("scale").value = data.scale
+  }
+
+  if(data.bpm){
+    document.getElementById("bpm").value = data.bpm
+  }
+
+  // neu aufbauen
+  build()
+  applyScale()
+  refreshMarkerOrders()
+  drawSequenceLines()
+}
+
+function listPatterns(){
+
+  const list = []
+
+  for(let i=0;i<localStorage.length;i++){
+    const key = localStorage.key(i)
+    if(key.startsWith("pattern_")){
+      list.push(key.replace("pattern_",""))
+    }
+  }
+
+  return list
+}
+
