@@ -291,7 +291,8 @@ function drawFretMarkers(){
   if(!grid) return
 
   // alte Marker löschen
-  document.querySelectorAll(".fret-marker-global").forEach(e => e.remove())
+  document.querySelectorAll(".fret-marker, .fret-marker-global")
+  .forEach(e => e.remove())
 
   const cells = grid.querySelectorAll(".cell")
 
