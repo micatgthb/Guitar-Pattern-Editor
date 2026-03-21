@@ -142,15 +142,35 @@ button:disabled{
 /* ===== SVG LAYER ===== */
 
 /* Saiten */
-#stringLayer{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+.cell{
+  position:relative;
+}
 
-  z-index:1; /* unter Marker */
-  pointer-events:none;
+/* Saite */
+.cell::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+
+  height:2px;
+  background:#999;
+
+  z-index:1;
+}
+
+/* Marker darüber */
+.dot{
+  position:relative;
+  z-index:2;
+}
+
+/* keine Saiten in Header & Label */
+.cell.header::after,
+.cell.string::after{
+  display:none;
 }
 
 /* Sequenzlinien */
