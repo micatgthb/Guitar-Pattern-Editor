@@ -861,6 +861,7 @@ if(stopBtn){
       drawStrings()
       applyScale()
       drawSequenceLines()
+      drawFretMarkers()
     })
   }
 })
