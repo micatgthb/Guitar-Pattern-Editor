@@ -1,3 +1,5 @@
+console.log("APP START")
+
 function initControls(){
 
 const rootSelect=document.getElementById("root")
