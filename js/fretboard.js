@@ -781,11 +781,16 @@ if(stopBtn){
     })
   }
 
-  build()
+build()
+
+setTimeout(()=>{
   drawStrings()
   applyScale()
   drawSequenceLines()
+}, 0)
   updateSequenceButton()
+
+  
   
 
   if(inst){
