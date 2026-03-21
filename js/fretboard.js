@@ -269,13 +269,6 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
 
       const markerSpread = 2.5 // 👈 HIER ändern (1 = normal, 2 = weiter, 3 = extrem)
       const midTop = Math.floor((strings.length - 1) / 2)
-
-      // einzelner Marker (3,5,7,9)
-      if ([3,5,7,9].includes(fret) && stringIndex === midTop) {
-        const m = document.createElement("div")
-        m.className = "fret-marker center-marker"
-        cell.appendChild(m)
-      }
       
 
       grid.appendChild(cell);
