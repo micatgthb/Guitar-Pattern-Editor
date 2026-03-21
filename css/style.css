@@ -64,6 +64,9 @@ button:disabled{
   justify-content:center;
   position:relative;
   background:white;
+  background: transparent;
+  overflow: visible;
+  z-index: 0;
 }
 
 .header{
@@ -113,7 +116,7 @@ button:disabled{
   justify-content:center;
 
   position:relative;
-  z-index:3;
+  z-index:10;
 }
 
 .dot,
