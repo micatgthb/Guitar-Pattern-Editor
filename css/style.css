@@ -54,7 +54,7 @@ cursor:not-allowed;
 
   width:max-content;
 
-  background: none; /* TEST */
+  background:none; /* TEST */
 }
 
 .cell{
