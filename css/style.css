@@ -1,200 +1,32 @@
-body{
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-margin:10px;
-}
-
-#controls{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-align-items:center;
-margin-bottom:15px;
-}
-
-#controls label{
-display:flex;
-align-items:center;
-gap:6px;
-white-space:nowrap;
-}
-
-button{
-padding:5px 10px;
-}
-
-button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-#grid{
-display:grid;
-grid-auto-rows:52px;
-gap:2px;
-}
-
-.cell{
-width:60px;
-border:1px solid #aaa;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-background:white;
-}
-
-.header{
-background:#eee;
-font-weight:700;
-}
-
-.string{
-background:#f5f5f5;
-font-weight:700;
-}
-
-.nut{
-border-right:4px solid black;
-}
-
-.dot{
-width:36px;
-height:36px;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.dot,
-.shape {
-  pointer-events: none;
-}
-
-#exportHeader{
-font-size:22px;
-font-weight:700;
-margin-bottom:10px;
-text-align:center;
-}
-
-button{
-padding:8px 14px;
-font-size:16px;
-}
-
 #board-wrapper{
-position:relative;
-overflow-x:auto;
-overflow-y:hidden;
-max-width:100%;
-display:inline-block;
-}
-
-#sequenceLayer{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:2;
-display:block;
-}
-
-#grid-wrapper{
   position: relative;
+  overflow-x:auto;
+  overflow-y:hidden;
+  max-width:100%;
+  display:inline-block;
 }
 
 #grid{
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 #stringLayer{
   position: absolute;
   top:0;
   left:0;
-  z-index: 2;
-  pointer-events: none;
-}
-
-#sequenceLayer{
-  position: absolute;
-  top:0;
-  left:0;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.dot{
-position:relative;
-z-index:3;
-}
-
-#sequenceModeBtn.active{
-background:#2c7be5;
-color:white;
-}
-
-#grid.sequence-mode .cell {
-  cursor: crosshair;
-}
-
-.order-label{
-  position:absolute;
-  top:-4px;
-  right:-4px;
-
-  background:#222;
-  color:white;
-
-  font-size:12px;
-  font-weight:700;
-
-  width:18px;
-  height:18px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:50%;
-
+  width:100%;
+  height:100%;
+  z-index:1;
   pointer-events:none;
 }
 
-#board-wrapper{
-  position: relative;
-}
-
-#grid{
-  position: relative;
-  z-index: 1;
-}
-
-#stringLayer{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
 #sequenceLayer{
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  pointer-events: none;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:3;
+  pointer-events:none;
 }
-
-/* Bass strings */
-
-.bass-string-1 { border-bottom: 3px solid #888; }
-.bass-string-2 { border-bottom: 4px solid #777; }
-.bass-string-3 { border-bottom: 5px solid #666; }
-.bass-string-4 { border-bottom: 6px solid #555; }
