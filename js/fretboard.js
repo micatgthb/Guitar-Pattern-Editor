@@ -528,6 +528,9 @@ function drawSequenceLines(){
     line.setAttribute("stroke-width", "2")
     line.setAttribute("stroke-linecap", "round")
 
+    svg.style.height = grid.offsetHeight + "px"
+    svg.style.width  = grid.offsetWidth + "px"
+
     svg.appendChild(line)
 
   })
@@ -594,6 +597,9 @@ function drawStrings(){
 
     svg.setAttribute("width", rect.width)
     svg.setAttribute("height", rect.height)
+
+    svg.style.height = grid.offsetHeight + "px"
+    svg.style.width  = grid.offsetWidth + "px"
 
     line.setAttribute("y1", y)
     line.setAttribute("y2", y)
