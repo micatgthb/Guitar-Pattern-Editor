@@ -651,6 +651,7 @@ function loadPattern(name){
 
   // neu aufbauen
   build()
+  drawStrings()
   applyScale()
   refreshMarkerOrders()
   drawSequenceLines()
@@ -775,14 +776,17 @@ if(stopBtn){
   }
 
   build()
+  drawStrings()
   applyScale()
   drawSequenceLines()
   updateSequenceButton()
+  
 
   if(inst){
     inst.addEventListener("change",()=>{
       stopPlayback()
       build()
+      drawStrings()
       applyScale()
       drawSequenceLines()
     })
