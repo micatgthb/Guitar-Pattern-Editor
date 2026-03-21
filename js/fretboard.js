@@ -596,7 +596,13 @@ function drawStrings(){
     line.setAttribute("stroke", "#999")
     line.setAttribute("stroke-width", "2")
 
+    line.setAttribute("stroke", "red")
+    line.setAttribute("stroke-width", "5")
+
     svg.appendChild(line)
+
+    console.log("Strings gezeichnet:", strings.length)
+    console.log("SVG size:", rect.width, rect.height)
 
   })
 
