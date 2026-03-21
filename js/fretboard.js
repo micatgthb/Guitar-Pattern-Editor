@@ -317,7 +317,18 @@ function drawFretMarkers(){
     const bottomRect = bottomCell.getBoundingClientRect()
 
     const x = topRect.left - gridRect.left + topRect.width / 2
-    const y = (topRect.top + bottomRect.bottom) / 2 - gridRect.top
+    const gridRect = grid.getBoundingClientRect()
+
+    // 🔥 NEU: echte Mitte zwischen den mittleren Saiten
+    const strings = grid.querySelectorAll(".cell.string")
+    
+    const mid1 = strings[Math.floor(strings.length / 2) - 1]
+    const mid2 = strings[Math.floor(strings.length / 2)]
+    
+    const r1 = mid1.getBoundingClientRect()
+    const r2 = mid2.getBoundingClientRect()
+    
+    const y = ((r1.top + r1.height / 2) + (r2.top + r2.height / 2)) / 2 - gridRect.top
 
     // 🎯 EINZELMARKER
     if(fret !== 12){
