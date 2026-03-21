@@ -258,9 +258,6 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
       cell.classList.add("string-line")
       cell.classList.add("string-" + stringIndex)
       
-      cell.classList.add("string-line");
-      cell.classList.add("string-" + stringIndex);
-      
       if (fret === 0) cell.classList.add("nut");
 
       cell.dataset.note = getNote(tuning[stringName], fret);
@@ -314,16 +311,14 @@ function drawFretMarkers(){
 
     const gridRect = grid.getBoundingClientRect()
     const topRect = topCell.getBoundingClientRect()
-    const bottomRect = bottomCell.getBoundingClientRect()
-
-    const x = topRect.left - gridRect.left + topRect.width / 2
-    const gridRect = grid.getBoundingClientRect()
-
-    // 🔥 NEU: echte Mitte zwischen den mittleren Saiten
-    const strings = grid.querySelectorAll(".cell.string")
     
-    const mid1 = strings[Math.floor(strings.length / 2) - 1]
-    const mid2 = strings[Math.floor(strings.length / 2)]
+    const x = topRect.left - gridRect.left + topRect.width / 2
+    
+    // echte Mitte zwischen den mittleren Saiten
+    const stringLabels = grid.querySelectorAll(".cell.string")
+    
+    const mid1 = stringLabels[Math.floor(stringLabels.length / 2) - 1]
+    const mid2 = stringLabels[Math.floor(stringLabels.length / 2)]
     
     const r1 = mid1.getBoundingClientRect()
     const r2 = mid2.getBoundingClientRect()
@@ -647,27 +642,26 @@ function drawStrings(){
   svg.innerHTML = ""
 
   const gridRect = grid.getBoundingClientRect()
+  const wrapperRect = wrapper.getBoundingClientRect()
 
   svg.setAttribute("viewBox", `0 0 ${wrapperRect.width} ${wrapperRect.height}`)
+  svg.setAttribute("width", gridRect.width)
+  svg.setAttribute("height", gridRect.height)
+
+  svg.style.height = grid.offsetHeight + "px"
+  svg.style.width  = grid.offsetWidth + "px"
 
   const strings = Array.from(grid.querySelectorAll(".cell.string"))
 
   strings.forEach(label => {
 
     const r = label.getBoundingClientRect()
-
     const y = r.top - gridRect.top + r.height / 2
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
 
     line.setAttribute("x1", 0)
-
-    svg.setAttribute("width", rect.width)
-    svg.setAttribute("height", rect.height)
-
-    svg.style.height = grid.offsetHeight + "px"
-    svg.style.width  = grid.offsetWidth + "px"
-
+    line.setAttribute("x2", gridRect.width)
     line.setAttribute("y1", y)
     line.setAttribute("y2", y)
 
@@ -676,7 +670,6 @@ function drawStrings(){
 
     svg.appendChild(line)
   })
-
 }
 
 function savePattern(){
