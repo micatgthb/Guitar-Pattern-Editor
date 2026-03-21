@@ -267,18 +267,19 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
       cell.dataset.fret = String(fret);
       cell.dataset.string = String(stringIndex);
 
-      // 👉 Fretmarker in JEDE Saite-Zelle dieses Bunds
-      if ([3, 5, 7, 9].includes(fret) && stringIndex === Math.floor(strings.length / 2)) {
-        const m = document.createElement("div");
-        m.className = "fret-marker";
-        cell.appendChild(m);
+      const midTop = Math.floor((strings.length - 1) / 2)   // 2 bei 6 Saiten
+      
+      if ([3,5,7,9].includes(fret) && stringIndex === midTop) {
+        const m = document.createElement("div")
+        m.className = "fret-marker center-marker"
+        cell.appendChild(m)
       }
       
       // 👉 Doppelmarker (Bund 12)
-      if (fret === 12 && (stringIndex === 2 || stringIndex === 3)) {
-        const m = document.createElement("div");
-        m.className = "fret-marker";
-        cell.appendChild(m);
+      if (fret === 12 && (stringIndex === midTop || stringIndex === midTop + 1)) {
+        const m = document.createElement("div")
+        m.className = "fret-marker"
+        cell.appendChild(m)
       }
 
       grid.appendChild(cell);
