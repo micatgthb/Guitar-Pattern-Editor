@@ -333,7 +333,7 @@ function drawFretMarkers(){
     // 🎯 DOPPELMARKER
     if(fret === 12){
 
-      const offset = 20
+      const offset = 75
 
       const m1 = document.createElement("div")
       m1.className = "fret-marker fret-marker-global"
