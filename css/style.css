@@ -46,7 +46,7 @@ cursor:not-allowed;
 #grid{
   display:grid;
   grid-auto-rows:52px;
-  outline:3px solid blue;
+  outline:3px solid black;
   gap:0px;
 
   position:relative;
