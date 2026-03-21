@@ -558,97 +558,6 @@ function refreshMarkerOrders(){
   })
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-
-  const seqBtn = document.getElementById("sequenceModeBtn")
-  const clearBtn = document.getElementById("clearSequenceBtn")
-  const inst = document.getElementById("instrument")
-
-  const playBtn = document.getElementById("playBtn")
-  const stopBtn = document.getElementById("stopBtn")
-
-  const scaleSelect = document.getElementById("scale")
-
-if(scaleSelect){
-  scaleSelect.addEventListener("change", ()=>{
-
-    stopPlayback()   // wichtig!
-
-    applyScale()
-    drawSequenceLines()
-
-  })
-}
-
-const rootSelect = document.getElementById("root")
-
-if(rootSelect){
-  rootSelect.addEventListener("change", ()=>{
-    stopPlayback()
-    applyScale()
-    drawSequenceLines()
-  })
-}
-
-if(playBtn){
-  playBtn.addEventListener("click", ()=>{
-    startPlayback()
-  })
-}
-
-if(stopBtn){
-  stopBtn.addEventListener("click", ()=>{
-    stopPlayback()
-  })
-}
-
-  if(seqBtn){
-    seqBtn.addEventListener("click", (e) => {
-      e.preventDefault()
-
-      sequenceMode = !sequenceMode
-
-      const grid = document.getElementById("grid")
-      if(grid){
-        grid.classList.toggle("sequence-mode", sequenceMode)
-      }
-
-      if(!sequenceMode){
-        clearSequence()
-      }
-
-      updateSequenceButton()
-
-      if(clearBtn){
-        clearBtn.disabled = !sequenceMode
-      }
-    })
-  }
-
-  if(clearBtn){
-    clearBtn.disabled = !sequenceMode
-
-    clearBtn.addEventListener("click", (e) => {
-      e.preventDefault()
-      clearSequence()
-    })
-  }
-
-  build()
-  applyScale()
-  drawSequenceLines()
-  updateSequenceButton()
-
-  if(inst){
-    inst.addEventListener("change",()=>{
-      stopPlayback()
-      build()
-      applyScale()
-      drawSequenceLines()
-    })
-  }
-})
-
 function savePattern(){
 
   const name = prompt("Name des Patterns?")
@@ -730,3 +639,107 @@ function showLoadMenu(){
     loadPattern(name)
   }
 }
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  const seqBtn = document.getElementById("sequenceModeBtn")
+  const clearBtn = document.getElementById("clearSequenceBtn")
+  const inst = document.getElementById("instrument")
+
+  const playBtn = document.getElementById("playBtn")
+  const stopBtn = document.getElementById("stopBtn")
+
+  const scaleSelect = document.getElementById("scale")
+
+  const saveBtn = document.getElementById("saveBtn")
+const loadBtn = document.getElementById("loadBtn")
+
+if(saveBtn){
+  saveBtn.addEventListener("click", savePattern)
+}
+
+if(loadBtn){
+  loadBtn.addEventListener("click", showLoadMenu)
+}
+
+if(scaleSelect){
+  scaleSelect.addEventListener("change", ()=>{
+
+    stopPlayback()   // wichtig!
+
+    applyScale()
+    drawSequenceLines()
+
+  })
+}
+
+const rootSelect = document.getElementById("root")
+
+if(rootSelect){
+  rootSelect.addEventListener("change", ()=>{
+    stopPlayback()
+    applyScale()
+    drawSequenceLines()
+  })
+}
+
+if(playBtn){
+  playBtn.addEventListener("click", ()=>{
+    startPlayback()
+  })
+}
+
+if(stopBtn){
+  stopBtn.addEventListener("click", ()=>{
+    stopPlayback()
+  })
+}
+
+  if(seqBtn){
+    seqBtn.addEventListener("click", (e) => {
+      e.preventDefault()
+
+      sequenceMode = !sequenceMode
+
+      const grid = document.getElementById("grid")
+      if(grid){
+        grid.classList.toggle("sequence-mode", sequenceMode)
+      }
+
+      if(!sequenceMode){
+        clearSequence()
+      }
+
+      updateSequenceButton()
+
+      if(clearBtn){
+        clearBtn.disabled = !sequenceMode
+      }
+    })
+  }
+
+  if(clearBtn){
+    clearBtn.disabled = !sequenceMode
+
+    clearBtn.addEventListener("click", (e) => {
+      e.preventDefault()
+      clearSequence()
+    })
+  }
+
+  build()
+  applyScale()
+  drawSequenceLines()
+  updateSequenceButton()
+
+  if(inst){
+    inst.addEventListener("change",()=>{
+      stopPlayback()
+      build()
+      applyScale()
+      drawSequenceLines()
+    })
+  }
+})
+
