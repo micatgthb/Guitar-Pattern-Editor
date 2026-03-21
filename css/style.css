@@ -1,254 +1,252 @@
 /* ===== GLOBAL ===== */
 
 body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-  margin:10px;
+font-family:-apple-system,BlinkMacSystemFont,“Segoe UI”,Roboto;
+margin:10px;
 }
-
 
 /* ===== CONTROLS ===== */
 
 #controls{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  align-items:center;
-  margin-bottom:15px;
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+align-items:center;
+margin-bottom:15px;
 }
 
 #controls label{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  white-space:nowrap;
+display:flex;
+align-items:center;
+gap:6px;
+white-space:nowrap;
 }
 
 button{
-  padding:8px 14px;
-  font-size:16px;
+padding:8px 14px;
+font-size:16px;
 }
 
 button:disabled{
-  opacity:0.4;
-  cursor:not-allowed;
+opacity:0.4;
+cursor:not-allowed;
 }
-
 
 /* ===== BOARD WRAPPER ===== */
 
 #board-wrapper{
-  position:relative;
-  overflow-x:auto;
-  overflow-y:hidden;
-  max-width:100%;
-  display:inline-block;
+position:relative;
+overflow-x:auto;
+overflow-y:hidden;
+max-width:100%;
+display:inline-block;
 
-  background: linear-gradient(
-    to right,
-    #2b1f16,
-    #3a2a1f,
-    #2b1f16
-  );
+/* Holzoptik */
+background: linear-gradient(
+to right,
+#2b1f16,
+#3a2a1f,
+#2b1f16
+);
 }
 
-/* Bundstäbe */
-
-.cell{
-  position:relative;
-}
-
-.cell:not(.string)::before{
-  content:"";
-  position:absolute;
-  top:0;
-  bottom:0;
-  right:-1px;
-
-  width:2px;
-
-  background: linear-gradient(
-    to right,
-    #ddd,
-    #999,
-    #ddd
-  );
-
-  z-index:2;
-}
-
-/* Sattel (Bund 0) */
-
-.nut::before{
-  width:5px;
-  background:#111;
-}
-
-.fret-marker{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#ddd;
-
-  position:absolute;
-  bottom:6px;
-  left:50%;
-  transform:translateX(-50%);
-
-  opacity:0.8;
-}
-
-/* Doppelpunkt Bund 12 */
-
-.double-marker{
-  position:absolute;
-  bottom:6px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:6px;
-}
 /* ===== GRID ===== */
 
 #grid{
-  display:grid;
-  grid-auto-rows:52px;
-  gap:2px;
+display:grid;
+grid-auto-rows:52px;
+gap:2px;
 
-  position:relative;
-  z-index:2;
+position:relative;
+z-index:2;
 }
 
 .cell{
-  width:60px;
-  border:1px solid #aaa;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  background:white;
-  background: transparent;
-  overflow: visible;
-  z-index: 0;
+width:60px;
+border:1px solid #aaa;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+position:relative;
+background:transparent;
+overflow:visible;
+z-index:0;
 }
+
+/* ===== HEADER / LABEL ===== */
 
 .header{
-  background:#eee;
-  font-weight:700;
+background:#eee;
+font-weight:700;
 }
 
 .string{
-  background:#f5f5f5;
-  font-weight:700;
+background:#f5f5f5;
+font-weight:700;
 }
 
-.nut{
-  border-right:4px solid black;
+/* ===== BUNDSTÄBE ===== */
+
+.cell:not(.string)::before{
+content:””;
+position:absolute;
+top:0;
+bottom:0;
+right:-1px;
+
+width:2px;
+
+background: linear-gradient(
+to right,
+#eee,
+#bbb,
+#888,
+#bbb,
+#eee
+);
+
+z-index:1;
 }
 
+/* Sattel */
+.nut::before{
+width:5px;
+background:#111;
+}
 
-/* ===== STRINGS ===== */
+/* ===== FRET MARKER ===== */
+
+.fret-marker{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#ddd;
+
+position:absolute;
+bottom:6px;
+left:50%;
+transform:translateX(-50%);
+
+opacity:0.8;
+}
+
+.double-marker{
+position:absolute;
+bottom:6px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:6px;
+}
+
+/* ===== SAITEN ===== */
 
 .cell.string-line::after{
-  content:"";
-  position:absolute;
-  left:-2px;
-  right:-2px;
-  top:50%;
-  transform:translateY(-50%);
+content:””;
+position:absolute;
 
-  height:2px;
-  background:#999;
+left:-2px;
+right:-2px;
 
-  z-index:1;
+top:50%;
+transform:translateY(-50%);
+
+background: linear-gradient(
+to bottom,
+#fff,
+#bbb,
+#777,
+#bbb,
+#fff
+);
+
+z-index:2;
 }
 
-.header,
-.string{
-  background: #eee;
-}
+/* echte Saitendicken (oben dünn → unten dick) */
 
-.string-line:nth-child(6n+2)::after { height:1px; }
-.string-line:nth-child(6n+3)::after { height:2px; }
-.string-line:nth-child(6n+4)::after { height:3px; }
-.string-line:nth-child(6n+5)::after { height:4px; }
-.string-line:nth-child(6n+6)::after { height:5px; }
+.string-0::after { height:1px; }
+.string-1::after { height:1.5px; }
+.string-2::after { height:2px; }
+.string-3::after { height:2.5px; }
+.string-4::after { height:3.5px; }
+.string-5::after { height:5px; }
 
 /* ===== MARKER ===== */
 
 .dot{
-  width:36px;
-  height:36px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+width:36px;
+height:36px;
 
-  position:relative;
-  z-index:10;
+display:flex;
+align-items:center;
+justify-content:center;
+
+position:relative;
+z-index:10; /* 👈 immer über Saiten + Bünden */
 }
 
 .dot,
 .shape{
-  pointer-events:none;
+pointer-events:none;
 }
-
 
 /* ===== ORDER LABEL ===== */
 
 .order-label{
-  position:absolute;
-  top:-4px;
-  right:-4px;
+position:absolute;
+top:-4px;
+right:-4px;
 
-  background:#222;
-  color:white;
+background:#222;
+color:white;
 
-  font-size:12px;
-  font-weight:700;
+font-size:12px;
+font-weight:700;
 
-  width:18px;
-  height:18px;
+width:18px;
+height:18px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+display:flex;
+align-items:center;
+justify-content:center;
 
-  border-radius:50%;
+border-radius:50%;
 
-  pointer-events:none;
+pointer-events:none;
 }
-
 
 /* ===== SEQUENCE MODE ===== */
 
 #sequenceModeBtn.active{
-  background:#2c7be5;
-  color:white;
+background:#2c7be5;
+color:white;
 }
 
 #grid.sequence-mode .cell{
-  cursor:crosshair;
+cursor:crosshair;
 }
-
 
 /* ===== SEQUENCE LAYER ===== */
 
 #sequenceLayer{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
 
-  z-index:4;
-  pointer-events:none;
+z-index:20; /* ganz oben */
+pointer-events:none;
 }
-
 
 /* ===== EXPORT HEADER ===== */
 
 #exportHeader{
-  font-size:22px;
-  font-weight:700;
-  margin-bottom:10px;
-  text-align:center;
+font-size:22px;
+font-weight:700;
+margin-bottom:10px;
+text-align:center;
 }
