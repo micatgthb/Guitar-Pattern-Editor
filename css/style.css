@@ -91,13 +91,7 @@ button:disabled{
   justify-content:center;
 
   position:relative;
-  z-index:3; /* 👈 über Saiten */
-}
-
-/* verhindert Klick-Block */
-.dot,
-.shape{
-  pointer-events:none;
+  z-index:3; /* FINAL */
 }
 
 
@@ -145,7 +139,13 @@ button:disabled{
 /* ===== STRINGS (echte durchgehende Linien) ===== */
 
 .cell{
+  width:60px;
+  border:1px solid #aaa;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   position:relative;
+  background:white;
 }
 
 /* Saite nur auf echten Spielzellen */
