@@ -97,6 +97,11 @@ button:disabled{
   z-index:1;
 }
 
+.string-line:nth-child(6n+2)::after { height:1px; }
+.string-line:nth-child(6n+3)::after { height:2px; }
+.string-line:nth-child(6n+4)::after { height:3px; }
+.string-line:nth-child(6n+5)::after { height:4px; }
+.string-line:nth-child(6n+6)::after { height:5px; }
 
 /* ===== MARKER ===== */
 
