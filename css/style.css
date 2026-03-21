@@ -163,6 +163,35 @@ color:white;
   pointer-events:none;
 }
 
+#board-wrapper{
+  position: relative;
+}
+
+#grid{
+  position: relative;
+  z-index: 1;
+}
+
+#stringLayer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#sequenceLayer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
 /* Bass strings */
 
 .bass-string-1 { border-bottom: 3px solid #888; }
