@@ -101,9 +101,29 @@ z-index:2;
 display:block;
 }
 
+#grid-wrapper{
+  position: relative;
+}
+
 #grid{
-position:relative;
-z-index:1;
+  position: relative;
+  z-index: 1;
+}
+
+#stringLayer{
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#sequenceLayer{
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: 3;
+  pointer-events: none;
 }
 
 .dot{
