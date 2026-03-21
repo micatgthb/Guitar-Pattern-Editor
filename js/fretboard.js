@@ -560,6 +560,8 @@ function refreshMarkerOrders(){
 
 function drawStrings(){
 
+  console.log("DRAW STRINGS CALLED")
+
   const svg = document.getElementById("stringLayer")
   const grid = document.getElementById("grid")
 
