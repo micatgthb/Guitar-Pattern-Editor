@@ -165,7 +165,7 @@ background:#111;
 
 .double-marker{
   display:flex;
-  gap:50px;
+  gap:5px;
 }
 /* ===== SAITEN ===== */
 .cell.string-line::after{
