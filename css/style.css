@@ -44,19 +44,17 @@ cursor:not-allowed;
 /* ===== GRID ===== */
 
 #grid{
-display:grid;
-grid-auto-rows:52px;
-outline:3px solid blue;
-gap:2px;
+  display:grid;
+  grid-auto-rows:52px;
+  outline:3px solid blue;
+  gap:2px;
 
-position:relative;
-z-index:10;
+  position:relative;
+  z-index:10;
 
-width:max-content;
+  width:max-content;
 
-#grid{
-  background: yellow;
-}
+  background: yellow; /* TEST */
 }
 
 .cell{
