@@ -162,6 +162,11 @@ background:#111;
 .center-marker{
   transform: translate(-50%, calc(-50% + 50px));
 }
+
+.double-marker{
+  display:flex;
+  gap:50px;
+}
 /* ===== SAITEN ===== */
 .cell.string-line::after{
   content:"";
