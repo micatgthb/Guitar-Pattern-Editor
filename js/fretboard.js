@@ -714,3 +714,18 @@ function listPatterns(){
   return list
 }
 
+function showLoadMenu(){
+
+  const patterns = listPatterns()
+
+  if(patterns.length === 0){
+    alert("Keine gespeicherten Patterns")
+    return
+  }
+
+  const name = prompt("Pattern laden:\n\n" + patterns.join("\n"))
+
+  if(name){
+    loadPattern(name)
+  }
+}
