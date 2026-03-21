@@ -159,9 +159,9 @@ background:#111;
   gap:12px;
 }
 
-  .center-marker{
-    transform: translate(-50%, 60%);
-  }
+.center-marker{
+  transform: translate(-50%, calc(-50% + 26px));
+}
 /* ===== SAITEN ===== */
 .cell.string-line::after{
   content:"";
