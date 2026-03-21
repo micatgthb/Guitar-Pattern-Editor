@@ -35,19 +35,19 @@ cursor:not-allowed;
 /* ===== BOARD WRAPPER ===== */
 
 #board-wrapper{
-position:relative;
-overflow-x:auto;
-overflow-y:hidden;
-max-width:100%;
-display:inline-block;
+  position:relative;
+  display:inline-block;
 
-/* Holzoptik */
-background: linear-gradient(
-to right,
-#2b1f16,
-#3a2a1f,
-#2b1f16
-);
+  /* ❌ WICHTIG: raus damit */
+  /* max-width:100%; */
+
+  /* Holz nur genau ums Grid */
+  background: linear-gradient(
+    to right,
+    #2b1f16,
+    #3a2a1f,
+    #2b1f16
+  );
 }
 
 /* ===== GRID ===== */
