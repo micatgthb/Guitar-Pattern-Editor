@@ -275,6 +275,9 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
       const cell = document.createElement("div");
       cell.className = "cell";
 
+      cell.classList.add("string-line")
+      cell.classList.add("string-" + stringIndex)
+      
       cell.classList.add("string-line");
       cell.classList.add("string-" + stringIndex);
       
