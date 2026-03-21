@@ -35,10 +35,10 @@ cursor:not-allowed;
 /* ===== BOARD WRAPPER ===== */
 
 #board-wrapper{
-  line-height:0;
   position:relative;
   display:inline-block;
-  outline:3px solid red;
+  height: fit-content;
+
   background: linear-gradient(
     to right,
     #2b1f16,
@@ -58,7 +58,7 @@ gap:2px;
 position:relative;
 z-index:5;
 
-height:auto;
+width:max-content;
 }
 
 .cell{
