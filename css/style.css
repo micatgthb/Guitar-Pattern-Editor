@@ -39,13 +39,6 @@ cursor:not-allowed;
   display:inline-block;
   height: fit-content;
   vertical-align:top;
-
-  background: linear-gradient(
-    to right,
-    #2b1f16,
-    #3a2a1f,
-    #2b1f16
-  );
 }
 
 /* ===== GRID ===== */
@@ -60,6 +53,21 @@ position:relative;
 z-index:10;
 
 width:max-content;
+
+  background:
+    linear-gradient(
+      to right,
+      #3a2a1f,
+      #5a3a26,
+      #3a2a1f
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 2px,
+      transparent 2px,
+      transparent 6px
+    );
 }
 
 .cell{
