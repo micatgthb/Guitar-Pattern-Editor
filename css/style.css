@@ -115,26 +115,39 @@ background:#111;
 /* ===== FRET MARKER ===== */
 
 .fret-marker{
-width:10px;
-height:10px;
-border-radius:50%;
-background:#ddd;
+  width:12px;
+  height:12px;
+  border-radius:50%;
 
-position:absolute;
-bottom:6px;
-left:50%;
-transform:translateX(-50%);
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
 
-opacity:0.8;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ffffff,
+    #dddddd 40%,
+    #888888 70%,
+    #444444
+  );
+
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,0.6),
+    inset 0 -1px 2px rgba(0,0,0,0.6),
+    0 0 2px rgba(0,0,0,0.5);
+
+  z-index:3;
+  opacity:0.9;
 }
 
 .double-marker{
-position:absolute;
-bottom:6px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-gap:6px;
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
 }
 
 /* ===== SAITEN ===== */
