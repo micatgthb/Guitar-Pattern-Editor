@@ -587,7 +587,7 @@ function drawStrings(){
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
 
-    line.setAttribute("x1", 60) // Start nach Label
+    line.setAttribute("x1", 0) // Start nach Label
     line.setAttribute("x2", rect.width)
 
     line.setAttribute("y1", y)
