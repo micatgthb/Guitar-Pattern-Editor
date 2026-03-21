@@ -277,21 +277,6 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
         cell.appendChild(m)
       }
       
-      // 🔥 Doppelmarker (12. Bund)
-      if (fret === 12) {
-      
-        if (stringIndex === midTop - markerSpread) {
-          const m = document.createElement("div")
-          m.className = "fret-marker"
-          cell.appendChild(m)
-        }
-      
-        if (stringIndex === midTop + markerSpread) {
-          const m = document.createElement("div")
-          m.className = "fret-marker"
-          cell.appendChild(m)
-        }
-      }
 
       grid.appendChild(cell);
     });
@@ -302,6 +287,72 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
 }
   console.log("click listener attached")
 
+}
+
+function drawFretMarkers(){
+
+  const grid = document.getElementById("grid")
+  if(!grid) return
+
+  // alte Marker löschen
+  document.querySelectorAll(".fret-marker-global").forEach(e => e.remove())
+
+  const cells = grid.querySelectorAll(".cell")
+
+  const frets = [...new Set(
+    Array.from(cells)
+      .map(c => c.dataset.fret)
+      .filter(f => f !== undefined)
+  )]
+
+  const markerFrets = [3,5,7,9,12]
+
+  markerFrets.forEach(fret => {
+
+    const fretCells = Array.from(cells).filter(c => c.dataset.fret == fret)
+    if(fretCells.length === 0) return
+
+    const topCell = fretCells[0]
+    const bottomCell = fretCells[fretCells.length - 1]
+
+    const gridRect = grid.getBoundingClientRect()
+    const topRect = topCell.getBoundingClientRect()
+    const bottomRect = bottomCell.getBoundingClientRect()
+
+    const x = topRect.left - gridRect.left + topRect.width / 2
+    const y = (topRect.top + bottomRect.bottom) / 2 - gridRect.top
+
+    // 🎯 EINZELMARKER
+    if(fret !== 12){
+
+      const m = document.createElement("div")
+      m.className = "fret-marker fret-marker-global"
+      m.style.left = x + "px"
+      m.style.top = y + "px"
+
+      grid.appendChild(m)
+    }
+
+    // 🎯 DOPPELMARKER
+    if(fret === 12){
+
+      const offset = 20
+
+      const m1 = document.createElement("div")
+      m1.className = "fret-marker fret-marker-global"
+      m1.style.left = x + "px"
+      m1.style.top = (y - offset) + "px"
+
+      const m2 = document.createElement("div")
+      m2.className = "fret-marker fret-marker-global"
+      m2.style.left = x + "px"
+      m2.style.top = (y + offset) + "px"
+
+      grid.appendChild(m1)
+      grid.appendChild(m2)
+    }
+
+  })
 }
 
 function createMarker(note, interval, displayMode, order = null) {
