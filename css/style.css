@@ -91,7 +91,7 @@ font-weight:700;
 /* ===== BUNDSTÄBE ===== */
 
 .cell:not(.string)::before{
-content:””;
+content:"";
 position:absolute;
 top:0;
 bottom:0;
@@ -145,7 +145,7 @@ gap:6px;
 /* ===== SAITEN ===== */
 
 .cell.string-line::after{
-content:””;
+content:"";
 position:absolute;
 
 left:-2px;
