@@ -339,11 +339,13 @@ function drawFretMarkers(){
       m1.className = "fret-marker fret-marker-global"
       m1.style.left = x + "px"
       m1.style.top = (y - offset) + "px"
-
+      m1.style.transform = "translate(-50%, -50%)"
+      
       const m2 = document.createElement("div")
       m2.className = "fret-marker fret-marker-global"
       m2.style.left = x + "px"
       m2.style.top = (y + offset) + "px"
+      m2.style.transform = "translate(-50%, -50%)"
 
       grid.appendChild(m1)
       grid.appendChild(m2)
