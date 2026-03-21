@@ -564,33 +564,28 @@ function drawStrings(){
 
   const svg = document.getElementById("stringLayer")
   const grid = document.getElementById("grid")
+  const wrapper = document.getElementById("board-wrapper")
 
-  if(!svg || !grid) return
+  if(!svg || !grid || !wrapper) return
 
   svg.innerHTML = ""
 
-  const rect = grid.getBoundingClientRect()
+  const wrapperRect = wrapper.getBoundingClientRect()
 
-  svg.setAttribute("width", rect.width)
-  svg.setAttribute("height", rect.height)
-  svg.style.width = rect.width + "px"
-  svg.style.height = rect.height + "px"
-  svg.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`)
+  svg.setAttribute("viewBox", `0 0 ${wrapperRect.width} ${wrapperRect.height}`)
 
   const strings = Array.from(grid.querySelectorAll(".cell.string"))
-
-  const gridRect = grid.getBoundingClientRect()
 
   strings.forEach(label => {
 
     const r = label.getBoundingClientRect()
 
-    const y = r.top - gridRect.top + r.height / 2
+    const y = r.top - wrapperRect.top + r.height / 2
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
 
-    line.setAttribute("x1", 0) // Start nach Label
-    line.setAttribute("x2", rect.width)
+    line.setAttribute("x1", 0)
+    line.setAttribute("x2", wrapperRect.width)
 
     line.setAttribute("y1", y)
     line.setAttribute("y2", y)
@@ -598,14 +593,7 @@ function drawStrings(){
     line.setAttribute("stroke", "#999")
     line.setAttribute("stroke-width", "2")
 
-    line.setAttribute("stroke", "red")
-    line.setAttribute("stroke-width", "5")
-
     svg.appendChild(line)
-
-    console.log("Strings gezeichnet:", strings.length)
-    console.log("SVG size:", rect.width, rect.height)
-
   })
 
 }
@@ -783,13 +771,10 @@ if(stopBtn){
     })
   }
 
-build()
-
-setTimeout(()=>{
+  build()
   drawStrings()
   applyScale()
   drawSequenceLines()
-}, 0)
   updateSequenceButton()
 
   
