@@ -35,13 +35,10 @@ cursor:not-allowed;
 /* ===== BOARD WRAPPER ===== */
 
 #board-wrapper{
+  line-height:0;
   position:relative;
   display:inline-block;
-
-  /* ❌ WICHTIG: raus damit */
-  /* max-width:100%; */
-
-  /* Holz nur genau ums Grid */
+  outline:3px solid red;
   background: linear-gradient(
     to right,
     #2b1f16,
@@ -55,10 +52,13 @@ cursor:not-allowed;
 #grid{
 display:grid;
 grid-auto-rows:52px;
+outline:3px solid blue;
 gap:2px;
 
 position:relative;
 z-index:5;
+
+height:auto;
 }
 
 .cell{
