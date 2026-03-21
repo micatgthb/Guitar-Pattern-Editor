@@ -160,7 +160,7 @@ background:#111;
 }
 
 .center-marker{
-  transform: translate(-50%, calc(-50% + 26px));
+  transform: translate(-50%, calc(-50% + 50px));
 }
 /* ===== SAITEN ===== */
 .cell.string-line::after{
