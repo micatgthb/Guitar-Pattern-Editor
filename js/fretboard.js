@@ -267,6 +267,7 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
       cell.dataset.fret = String(fret);
       cell.dataset.string = String(stringIndex);
 
+      const markerSpread = 2 // 👈 HIER ändern (1 = normal, 2 = weiter, 3 = extrem)
       const midTop = Math.floor((strings.length - 1) / 2)
 
       // einzelner Marker (3,5,7,9)
@@ -279,15 +280,13 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
       // 🔥 Doppelmarker (12. Bund)
       if (fret === 12) {
       
-        // oberer Punkt (z.B. G-Saite)
-        if (stringIndex === midTop - 1) {
+        if (stringIndex === midTop - markerSpread) {
           const m = document.createElement("div")
           m.className = "fret-marker"
           cell.appendChild(m)
         }
       
-        // unterer Punkt (z.B. D-Saite)
-        if (stringIndex === midTop + 1) {
+        if (stringIndex === midTop + markerSpread) {
           const m = document.createElement("div")
           m.className = "fret-marker"
           cell.appendChild(m)
