@@ -275,6 +275,8 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
       const cell = document.createElement("div");
       cell.className = "cell";
 
+      cell.classList.add("string-line");
+      
       if (fret === 0) cell.classList.add("nut");
 
       cell.dataset.note = getNote(tuning[stringName], fret);
