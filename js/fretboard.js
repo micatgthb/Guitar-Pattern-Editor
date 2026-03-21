@@ -558,6 +558,50 @@ function refreshMarkerOrders(){
   })
 }
 
+function drawStrings(){
+
+  const svg = document.getElementById("stringLayer")
+  const grid = document.getElementById("grid")
+
+  if(!svg || !grid) return
+
+  svg.innerHTML = ""
+
+  const rect = grid.getBoundingClientRect()
+
+  svg.setAttribute("width", rect.width)
+  svg.setAttribute("height", rect.height)
+  svg.style.width = rect.width + "px"
+  svg.style.height = rect.height + "px"
+  svg.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`)
+
+  const strings = Array.from(grid.querySelectorAll(".cell.string"))
+
+  const gridRect = grid.getBoundingClientRect()
+
+  strings.forEach(label => {
+
+    const r = label.getBoundingClientRect()
+
+    const y = r.top - gridRect.top + r.height / 2
+
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
+
+    line.setAttribute("x1", 60) // Start nach Label
+    line.setAttribute("x2", rect.width)
+
+    line.setAttribute("y1", y)
+    line.setAttribute("y2", y)
+
+    line.setAttribute("stroke", "#999")
+    line.setAttribute("stroke-width", "2")
+
+    svg.appendChild(line)
+
+  })
+
+}
+
 function savePattern(){
 
   const name = prompt("Name des Patterns?")
