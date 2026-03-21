@@ -236,26 +236,6 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
     h.className = "cell header";
     h.textContent = fret;
 
-    if ([3, 5, 7, 9].includes(fret)) {
-      const m = document.createElement("div");
-      m.className = "fret-marker";
-      h.appendChild(m);
-    }
-
-    if (fret === 12) {
-      const d = document.createElement("div");
-      d.className = "double-marker";
-
-      const m1 = document.createElement("div");
-      const m2 = document.createElement("div");
-      m1.className = "fret-marker";
-      m2.className = "fret-marker";
-
-      d.appendChild(m1);
-      d.appendChild(m2);
-      h.appendChild(d);
-    }
-
     grid.appendChild(h);
   });
 
@@ -286,6 +266,20 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
       cell.dataset.note = getNote(tuning[stringName], fret);
       cell.dataset.fret = String(fret);
       cell.dataset.string = String(stringIndex);
+
+      // 👉 Fretmarker in JEDE Saite-Zelle dieses Bunds
+      if ([3, 5, 7, 9].includes(fret) && stringIndex === Math.floor(strings.length / 2)) {
+        const m = document.createElement("div");
+        m.className = "fret-marker";
+        cell.appendChild(m);
+      }
+      
+      // 👉 Doppelmarker (Bund 12)
+      if (fret === 12 && (stringIndex === 2 || stringIndex === 3)) {
+        const m = document.createElement("div");
+        m.className = "fret-marker";
+        cell.appendChild(m);
+      }
 
       grid.appendChild(cell);
     });
