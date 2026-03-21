@@ -156,11 +156,11 @@ background:#111;
   left:50%;
   transform:translate(-50%, -50%);
   display:flex;
-  gap:50px;
+  gap:1px;
 }
 
 .center-marker{
-  transform: translate(-50%, calc(-50% + 50px));
+  transform: translate(-50%, calc(-50% + 150px));
 }
 
 /* ===== SAITEN ===== */
