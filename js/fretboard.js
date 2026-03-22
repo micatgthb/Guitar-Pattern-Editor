@@ -329,9 +329,10 @@ function drawFretMarkers(){
 
       const m = document.createElement("div")
       m.className = "fret-marker fret-marker-global"
-      m.style.left = x + "px"
-      m.style.top = y + "px"
-      m.style.transform = "translate(-50%, -50%)"
+      const size = 18
+
+      m.style.left = (x - size/2) + "px"
+      m.style.top  = (y - size/2) + "px"
 
       grid.appendChild(m)
     }
