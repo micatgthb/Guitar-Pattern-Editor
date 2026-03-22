@@ -320,14 +320,14 @@ function drawFretMarkers(){
     const r1 = mid1.getBoundingClientRect()
     const r2 = mid2.getBoundingClientRect()
 
-    const visualOffset = 8   // 👈 hier feinjustieren - nach oben, + nach unten
+    const baseOffset = 8   // 👈 hier feinjustieren - nach oben, + nach unten
     
     const centerY = (
       (r1.top + r1.height / 2) + 
       (r2.top + r2.height / 2)
     ) / 2 - gridRect.top
     
-    const y = centerY + visualOffset
+    const y = centerY + baseOffset
     // 🎯 EINZELMARKER
     if(fret !== 12){
 
@@ -345,16 +345,17 @@ function drawFretMarkers(){
     if(fret === 12){
 
       const offset = 50   // 👈 HIER feinjustieren - zusammen, + auseinander
+      const doubleOffset = -4   // 👈 nur für Doppelmarker, die senkrechte Positrion
 
       const m1 = document.createElement("div")
       m1.className = "fret-marker fret-marker-global"
       m1.style.left = (x - size/2) + "px"
-      m1.style.top  = (y - offset - size/2) + "px"
+      m1.style.top  = (y - offset + doubleOffset - size/2) + "px"
 
       const m2 = document.createElement("div")
       m2.className = "fret-marker fret-marker-global"
       m2.style.left = (x - size/2) + "px"
-      m2.style.top  = (y + offset - size/2) + "px"
+      m2.style.top  = (y + offset + doubleOffset - size/2) + "px"
 
       const size = 18
       
