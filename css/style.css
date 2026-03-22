@@ -44,7 +44,14 @@ cursor:not-allowed;
 /* ===== GRID ===== */
 
 #grid{
-  background:red;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #5a3a20,
+      #5a3a20 30px,
+      #7a5230 30px,
+      #7a5230 60px
+    );
   display:grid;
   grid-auto-rows:52px;
   outline:3px solid black;
