@@ -308,7 +308,8 @@ function drawFretMarkers(){
     const topRect = topCell.getBoundingClientRect()
 
     // X = mittig im Bund
-    const x = topRect.left - gridRect.left + topRect.width / 2
+    const fretOffsetX = -8   // 👈 hier feinjustieren
+    const x = topRect.left - gridRect.left + topRect.width / 2 + fretOffsetX
 
     // 🔥 echte Mitte zwischen den mittleren Saiten
     const stringLabels = grid.querySelectorAll(".cell.string")
@@ -319,11 +320,14 @@ function drawFretMarkers(){
     const r1 = mid1.getBoundingClientRect()
     const r2 = mid2.getBoundingClientRect()
 
-    const visualOffset = 0  // 👈 HIER spielen (negativ = nach oben)
-
-    const y = ((r1.top + r1.height / 2) + (r2.top + r2.height / 2)) / 2 
-          - gridRect.top 
-          + visualOffset
+    const visualOffset = -4   // 👈 hier feinjustieren
+    
+    const centerY = (
+      (r1.top + r1.height / 2) + 
+      (r2.top + r2.height / 2)
+    ) / 2 - gridRect.top
+    
+    const y = centerY + visualOffset
     // 🎯 EINZELMARKER
     if(fret !== 12){
 
