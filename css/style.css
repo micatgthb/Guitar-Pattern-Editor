@@ -68,7 +68,6 @@ justify-content:center;
 position:relative;
 background:transparent;
 overflow:visible;
-z-index:0;
 }
 
 /* ===== HEADER / LABEL ===== */
@@ -153,9 +152,6 @@ background:#111;
 }
 
 .fret-marker-global{
-  position:absolute;
-  transform:none;
-  z-index:1; /* unter Saiten */
 
   width:18px;
   height:18px;
@@ -271,6 +267,27 @@ height:100%;
 z-index:5;
 pointer-events:none;
 
+}
+
+/* ===== LAYER  SETZEN ===== */
+.cell:not(.string)::before{
+  z-index:0;
+}
+
+.fret-marker-global{
+  position:absolute;
+  transform: translate(-50%, -50%);
+  pointer-events:none;
+  z-index:2;
+}
+
+.cell.string-line::after{
+  z-index:3;
+}
+
+.dot{
+  position:relative;
+  z-index:10;
 }
 
 
