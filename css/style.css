@@ -195,7 +195,7 @@ background:#111;
 
   /* ===== Position korrigieren + nach oben und nach links, - nach unten und nach rechts ===== */
   left: calc(50% + 33px); 
-  top:  calc(50% + 28px);
+  top:  calc(50% + 33px);
 
   display:flex;
   align-items:center;
