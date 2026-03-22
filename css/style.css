@@ -45,22 +45,24 @@ cursor:not-allowed;
 
 #grid{
   background:
+    /* Maserung */
     repeating-linear-gradient(
       90deg,
-      #5a3a20,
-      #5a3a20 30px,
-      #7a5230 30px,
-      #7a5230 60px
+      #4b2f1a 0px,
+      #6a4324 25px,
+      #3f2816 50px,
+      #7a5230 75px,
+      #4b2f1a 100px
+    ),
+
+    /* leichte vertikale Schattierung */
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.08),
+      rgba(0,0,0,0.25)
     );
-  display:grid;
-  grid-auto-rows:52px;
-  outline:3px solid black;
-  gap:0px;
 
-  position:relative;
-  z-index:auto;
-
-  width:max-content;
+  background-blend-mode: multiply;
 }
 
 .cell{
