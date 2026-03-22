@@ -1,35 +1,35 @@
 /* ===== GLOBAL ===== */
 
 body{
-font-family:-apple-system,BlinkMacSystemFont,“Segoe UI”,Roboto;
-margin:10px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+  margin:10px;
 }
 
 /* ===== CONTROLS ===== */
 
 #controls{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-align-items:center;
-margin-bottom:15px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  margin-bottom:15px;
 }
 
 #controls label{
-display:flex;
-align-items:center;
-gap:6px;
-white-space:nowrap;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  white-space:nowrap;
 }
 
 button{
-padding:8px 14px;
-font-size:16px;
+  padding:8px 14px;
+  font-size:16px;
 }
 
 button:disabled{
-opacity:0.4;
-cursor:not-allowed;
+  opacity:0.4;
+  cursor:not-allowed;
 }
 
 /* ===== BOARD WRAPPER ===== */
@@ -37,15 +37,22 @@ cursor:not-allowed;
 #board-wrapper{
   position:relative;
   display:inline-block;
-  height: fit-content;
+  height:fit-content;
   vertical-align:top;
 }
 
 /* ===== GRID ===== */
 
 #grid{
+  display:grid;
+  grid-auto-rows:52px;
+  outline:3px solid black;
+  gap:0px;
+
+  position:relative;
+  width:max-content;
+
   background:
-    /* Maserung */
     repeating-linear-gradient(
       90deg,
       #4b2f1a 0px,
@@ -54,69 +61,61 @@ cursor:not-allowed;
       #7a5230 75px,
       #4b2f1a 100px
     ),
-
-    /* leichte vertikale Schattierung */
     linear-gradient(
       180deg,
       rgba(255,255,255,0.08),
       rgba(0,0,0,0.25)
     );
 
-  background-blend-mode: multiply;
+  background-blend-mode:multiply;
 }
 
 .cell{
-width:60px;
-border:none;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-position:relative;
-background:transparent;
-overflow:visible;
+  width:60px;
+  border:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  background:transparent;
+  overflow:visible;
 }
 
 /* ===== HEADER / LABEL ===== */
 
 .header{
-background:#eee;
-font-weight:700;
+  background:#eee;
+  font-weight:700;
 }
 
 .string{
-background:#f5f5f5;
-font-weight:700;
+  background:#f5f5f5;
+  font-weight:700;
 }
 
 /* ===== BUNDSTÄBE ===== */
 
 .cell:not(.string)::before{
-content:"";
-position:absolute;
-top:0;
-bottom:0;
-right:0px;
-
-width:6px;
-
-background: linear-gradient(
-to right,
-#eee,
-#bbb,
-#888,
-#bbb,
-#eee
-);
-
-z-index:0;
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  width:6px;
+  background:linear-gradient(
+    to right,
+    #eee,
+    #bbb,
+    #888,
+    #bbb,
+    #eee
+  );
+  z-index:0;
 }
 
-/* Sattel */
 .nut::before{
-width:5px;
-background:#111;
+  width:5px;
+  background:#111;
 }
 
 /* ===== FRET MARKER ===== */
@@ -129,7 +128,7 @@ background:#111;
   height:18px;
   border-radius:50%;
 
-  background: radial-gradient(
+  background:radial-gradient(
     circle at 30% 30%,
     #ffffff,
     #dddddd 40%,
@@ -137,54 +136,34 @@ background:#111;
     #444444
   );
 
-  z-index:2;
-}
-
   box-shadow:
     inset 0 1px 2px rgba(255,255,255,0.6),
     inset 0 -1px 2px rgba(0,0,0,0.6),
     0 0 2px rgba(0,0,0,0.5);
 
-  z-index:1;
+  z-index:2;
   opacity:0.9;
 }
 
-.double-marker{
-  position:absolute;
-  top:50%;
-  left:50%;
-
-  display:flex;
-  gap:12px;
-
-  transform: translate(-50%, calc(-50% + 26px));
-}
-
 /* ===== SAITEN ===== */
+
 .cell.string-line::after{
   content:"";
   position:absolute;
-
   left:-2px;
   right:-2px;
-
   top:50%;
   transform:translateY(-50%);
-
-  background: linear-gradient(
+  background:linear-gradient(
     to bottom,
     #ffffff,
     #dddddd,
     #888888,
     #444444
   );
-
-  box-shadow: 0 0 2px rgba(255,255,255,0.6);
-
+  box-shadow:0 0 2px rgba(255,255,255,0.6);
   z-index:3;
 }
-
-/* echte Saitendicken (oben dünn → unten dick) */
 
 .string-0::after { height:1px; }
 .string-1::after { height:1.5px; }
@@ -193,17 +172,15 @@ background:#111;
 .string-4::after { height:3.5px; }
 .string-5::after { height:5px; }
 
-/* ===== MARKER ===== */
+/* ===== NOTE MARKERS ===== */
 
 .dot{
   position:absolute;
-
   width:36px;
   height:36px;
 
-  /* ===== Position korrigieren - nach oben und nach links, + nach unten und nach rechts ===== */
-  left: calc(50% - 37px); 
-  top:  calc(50% - 24px);
+  left:calc(50% - 37px);
+  top:calc(50% - 24px);
 
   display:flex;
   align-items:center;
@@ -214,100 +191,57 @@ background:#111;
 
 .dot,
 .shape{
-pointer-events:none;
+  pointer-events:none;
 }
 
 /* ===== ORDER LABEL ===== */
 
 .order-label{
-position:absolute;
-top:-4px;
-right:-4px;
-
-background:#222;
-color:white;
-
-font-size:12px;
-font-weight:700;
-
-width:18px;
-height:18px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-border-radius:50%;
-
-pointer-events:none;
+  position:absolute;
+  top:-4px;
+  right:-4px;
+  background:#222;
+  color:white;
+  font-size:12px;
+  font-weight:700;
+  width:18px;
+  height:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  pointer-events:none;
 }
 
 /* ===== SEQUENCE MODE ===== */
 
 #sequenceModeBtn.active{
-background:#2c7be5;
-color:white;
+  background:#2c7be5;
+  color:white;
 }
 
 #grid.sequence-mode .cell{
-cursor:crosshair;
+  cursor:crosshair;
 }
 
 /* ===== SEQUENCE LAYER ===== */
 
 #sequenceLayer,
 #stringLayer{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-
-z-index:5;
-pointer-events:none;
-
-}
-
-/* ===== LAYER  SETZEN ===== */
-.cell:not(.string)::before{
-  z-index:0;
-}
-
-.fret-marker-global{
   position:absolute;
-  transform: translate(-50%, -50%);
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:5;
   pointer-events:none;
-
-  width:18px;
-  height:18px;
-  border-radius:50%;
-
-  background: radial-gradient(
-    circle at 30% 30%,
-    #ffffff,
-    #dddddd 40%,
-    #888888 70%,
-    #444444
-  );
-
-  z-index:2;
 }
-
-.cell.string-line::after{
-  z-index:3;
-}
-
-.dot{
-  position:relative;
-  z-index:10;
-}
-
 
 /* ===== EXPORT HEADER ===== */
 
 #exportHeader{
-font-size:22px;
-font-weight:700;
-margin-bottom:10px;
-text-align:center;
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:10px;
+  text-align:center;
 }
