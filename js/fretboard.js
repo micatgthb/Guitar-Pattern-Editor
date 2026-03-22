@@ -308,7 +308,7 @@ function drawFretMarkers(){
     const topRect = topCell.getBoundingClientRect()
 
     // X = mittig im Bund
-    const fretOffsetX = -2   // 👈 hier feinjustieren - nach lnks, + nach rechts
+    const fretOffsetX = 2   // 👈 hier feinjustieren - nach lnks, + nach rechts
     const x = topRect.left - gridRect.left + topRect.width / 2 + fretOffsetX
 
     // 🔥 echte Mitte zwischen den mittleren Saiten
@@ -344,7 +344,7 @@ function drawFretMarkers(){
     // 🎯 DOPPELMARKER
     if(fret === 12){
 
-      const offset = 60   // 👈 HIER feinjustieren
+      const offset = 60   // 👈 HIER feinjustieren 
 
       const m1 = document.createElement("div")
       m1.className = "fret-marker fret-marker-global"
