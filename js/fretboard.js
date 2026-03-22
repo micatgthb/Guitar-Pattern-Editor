@@ -317,7 +317,7 @@ function drawFretMarkers(){
     const r1 = mid1.getBoundingClientRect()
     const r2 = mid2.getBoundingClientRect()
 
-    const visualOffset = 0  // 👈 HIER spielen (negativ = nach oben)
+    const visualOffset = -8  // 👈 HIER spielen (negativ = nach oben)
 
     const y = ((r1.top + r1.height / 2) + (r2.top + r2.height / 2)) / 2 
           - gridRect.top 
