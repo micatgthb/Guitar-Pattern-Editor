@@ -346,7 +346,7 @@ function drawFretMarkers(){
 
       const size = 18
       const offset = 50   // 👈 HIER feinjustieren - zusammen, + auseinander
-      const doubleOffset = -4   // 👈 nur für Doppelmarker, die senkrechte Positrion
+      const doubleOffset = -2   // 👈 nur für Doppelmarker, die senkrechte Position - nach oben + nach unten
 
       const m1 = document.createElement("div")
       m1.className = "fret-marker fret-marker-global"
