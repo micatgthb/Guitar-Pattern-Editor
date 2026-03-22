@@ -320,7 +320,7 @@ function drawFretMarkers(){
     const r1 = mid1.getBoundingClientRect()
     const r2 = mid2.getBoundingClientRect()
 
-    const visualOffset = 10   // 👈 hier feinjustieren - nach oben, + nach unten
+    const visualOffset = 8   // 👈 hier feinjustieren - nach oben, + nach unten
     
     const centerY = (
       (r1.top + r1.height / 2) + 
