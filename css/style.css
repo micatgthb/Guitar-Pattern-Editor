@@ -54,7 +54,19 @@ cursor:not-allowed;
 
   width:max-content;
 
-  background:none; /* TEST */
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #6e4b2a,
+      #6e4b2a 40px,
+      #7a5230 40px,
+      #7a5230 80px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.05),
+      rgba(0,0,0,0.2)
+    );
 }
 
 .cell{
