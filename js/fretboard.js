@@ -278,7 +278,9 @@ const endFret = parseInt(document.getElementById("endFret").value, 10);
   console.log("click listener attached")
 
   
-  drawFretMarkers()   // 👈 HIER rein
+  requestAnimationFrame(() => {
+  drawFretMarkers()
+})
 
 }
 
