@@ -348,14 +348,16 @@ function drawFretMarkers(){
 
       const m1 = document.createElement("div")
       m1.className = "fret-marker fret-marker-global"
-      m1.style.left = x + "px"
-      m1.style.top = (y - offset) + "px"
+      m1.style.left = (x - size/2) + "px"
+      m1.style.top  = (y - offset - size/2) + "px"
 
       const m2 = document.createElement("div")
       m2.className = "fret-marker fret-marker-global"
-      m2.style.left = x + "px"
-      m2.style.top = (y + offset) + "px"
+      m2.style.left = (x - size/2) + "px"
+      m2.style.top  = (y + offset - size/2) + "px"
 
+      const size = 18
+      
       grid.appendChild(m1)
       grid.appendChild(m2)
     }
