@@ -50,7 +50,7 @@ cursor:not-allowed;
   gap:0px;
 
   position:relative;
-  z-index:10;
+  z-index:auto;
 
   width:max-content;
 
@@ -149,21 +149,6 @@ background:#111;
   gap:12px;
 
   transform: translate(-50%, calc(-50% + 26px));
-}
-
-.fret-marker-global{
-
-  width:18px;
-  height:18px;
-  border-radius:50%;
-
-  background: radial-gradient(
-    circle at 30% 30%,
-    #ffffff,
-    #dddddd 40%,
-    #888888 70%,
-    #444444
-  );
 }
 
 /* ===== SAITEN ===== */
@@ -278,6 +263,19 @@ pointer-events:none;
   position:absolute;
   transform: translate(-50%, -50%);
   pointer-events:none;
+
+  width:18px;
+  height:18px;
+  border-radius:50%;
+
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ffffff,
+    #dddddd 40%,
+    #888888 70%,
+    #444444
+  );
+
   z-index:2;
 }
 
