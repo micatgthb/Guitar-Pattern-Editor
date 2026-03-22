@@ -344,6 +344,7 @@ function drawFretMarkers(){
     // 🎯 DOPPELMARKER
     if(fret === 12){
 
+      const size = 18
       const offset = 50   // 👈 HIER feinjustieren - zusammen, + auseinander
       const doubleOffset = -4   // 👈 nur für Doppelmarker, die senkrechte Positrion
 
@@ -357,7 +358,7 @@ function drawFretMarkers(){
       m2.style.left = (x - size/2) + "px"
       m2.style.top  = (y + offset + doubleOffset - size/2) + "px"
 
-      const size = 18
+      
       
       grid.appendChild(m1)
       grid.appendChild(m2)
