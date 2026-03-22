@@ -308,7 +308,7 @@ function drawFretMarkers(){
     const topRect = topCell.getBoundingClientRect()
 
     // X = mittig im Bund
-    const fretOffsetX = -8   // 👈 hier feinjustieren
+    const fretOffsetX = 0   // 👈 hier feinjustieren
     const x = topRect.left - gridRect.left + topRect.width / 2 + fretOffsetX
 
     // 🔥 echte Mitte zwischen den mittleren Saiten
@@ -320,7 +320,7 @@ function drawFretMarkers(){
     const r1 = mid1.getBoundingClientRect()
     const r2 = mid2.getBoundingClientRect()
 
-    const visualOffset = -4   // 👈 hier feinjustieren
+    const visualOffset = 0   // 👈 hier feinjustieren
     
     const centerY = (
       (r1.top + r1.height / 2) + 
