@@ -193,8 +193,8 @@ background:#111;
   width:36px;
   height:36px;
 
-  left: calc(50% - 10px);
-  top:  calc(50% - 10px);
+  left: calc(50% - 30px);
+  top:  calc(50% - 30px);
 
   display:flex;
   align-items:center;
