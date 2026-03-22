@@ -188,18 +188,19 @@ background:#111;
 /* ===== MARKER ===== */
 
 .dot{
-width:36px;
-height:36px;
+  position:absolute;
 
-display:flex;
-align-items:center;
-justify-content:center;
+  width:36px;
+  height:36px;
 
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%, -50%);
-z-index:10;
+  left: calc(50% - 18px);
+  top:  calc(50% - 18px);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  z-index:10;
 }
 
 .dot,
