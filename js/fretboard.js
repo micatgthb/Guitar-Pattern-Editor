@@ -406,7 +406,7 @@ svg.setAttribute("height","44");
   shape.style.filter = "drop-shadow(0 0 6px rgba(255,0,0,0.8))";
 
   textColor = "#ffffff";
-}
+
   } else if (interval === 3 || interval === 4) {
     shape = document.createElementNS(svgNS, "polygon");
     shape.setAttribute("points", "50,8 92,88 8,88");
