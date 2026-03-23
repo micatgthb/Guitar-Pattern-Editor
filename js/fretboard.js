@@ -400,10 +400,9 @@ svg.setAttribute("height","44");
 
  if (interval !== 0) {
   shape.setAttribute("fill", "none");
-  }
-  
   shape.setAttribute("stroke", stroke);
   shape.setAttribute("stroke-width", strokeWidth);
+   }
 
   // 🔥 Glow-Effekt
   shape.style.filter = "drop-shadow(0 0 6px rgba(255,0,0,0.8))";
