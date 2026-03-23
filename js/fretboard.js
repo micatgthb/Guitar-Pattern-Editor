@@ -378,8 +378,8 @@ function createMarker(note, interval, displayMode, order = null) {
 
   const svg = document.createElementNS(svgNS, "svg");
 svg.setAttribute("viewBox", "0 0 100 100");
-svg.setAttribute("width","36");
-svg.setAttribute("height","36");
+svg.setAttribute("width","44");
+svg.setAttribute("height","44");
 
   svg.classList.add("shape");
 
