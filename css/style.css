@@ -176,11 +176,11 @@ button:disabled{
 
 .dot{
   position:absolute;
-  width:36px;
-  height:36px;
+  width:44px;
+  height:44px;
 
-  left:calc(50% - 18px);
-  top:calc(50% - 24px);
+  left:calc(50% - 22px);
+  top:calc(50% - 22px);
 
   display:flex;
   align-items:center;
