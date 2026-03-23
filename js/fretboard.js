@@ -423,13 +423,26 @@ svg.setAttribute("height","36");
   svg.appendChild(shape);
 
   const text = document.createElementNS(svgNS, "text");
-  text.setAttribute("x", "50");
-  text.setAttribute("y", "54");
-  text.setAttribute("text-anchor", "middle");
-  text.setAttribute("dominant-baseline", "middle");
-  text.setAttribute("font-size", "30");
-  text.setAttribute("font-weight", "600");
-  text.setAttribute("fill", textColor);
+
+text.setAttribute("x", "50");
+text.setAttribute("y", "52"); // leicht höher für optische Mitte
+
+text.setAttribute("text-anchor", "middle");
+text.setAttribute("dominant-baseline", "middle");
+
+// 🔥 LESBARKEIT
+text.setAttribute("font-size", "34");     // größer
+text.setAttribute("font-weight", "700");  // fetter
+text.setAttribute("fill", "#ffffff");     // weiß
+
+// 🔥 KONTRAST (Gamechanger!)
+text.setAttribute("stroke", "#000000");
+text.setAttribute("stroke-width", "2");
+
+text.textContent =
+  displayMode === "intervals"
+    ? intervalNames[interval]
+    : note;
   text.textContent = displayMode === "intervals" ? intervalNames[interval] : note;
   svg.appendChild(text);
 
