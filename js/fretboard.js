@@ -431,26 +431,13 @@ svg.setAttribute("height","44");
   shape.setAttribute("stroke-linecap", "round");
   svg.appendChild(shape);
 
-  const text = document.createElementNS(svgNS, "text");
+// ===== TEXT CONTENT =====
+const label =
+  displayMode === "intervals"
+    ? intervalNames[interval]
+    : note;
 
-text.setAttribute("x", "50");
-text.setAttribute("y", "52"); // leicht höher für optische Mitte
-
-text.setAttribute("text-anchor", "middle");
-text.setAttribute("dominant-baseline", "middle");
-
-// 🔥 LESBARKEIT
-text.setAttribute("font-size", "38");     // größer
-text.setAttribute("font-weight", "700");  // fetter
-text.setAttribute("fill", "#ffffff");     // weiß
-
-  if (interval === 0) {
-  svg.setAttribute("width","50");
-  svg.setAttribute("height","50");
-}
-
-// 🔥 KONTRAST (Gamechanger!)
-// Schatten (hinterer Text)
+// ===== SHADOW =====
 const shadow = document.createElementNS(svgNS, "text");
 
 shadow.setAttribute("x", "50");
@@ -461,24 +448,28 @@ shadow.setAttribute("dominant-baseline", "middle");
 shadow.setAttribute("font-size", "38");
 shadow.setAttribute("font-weight", "700");
 
-shadow.setAttribute("fill", "rgba(0,0,0,0.8)");
+shadow.setAttribute("fill", "rgba(0,0,0,0.6)");
+shadow.setAttribute("transform", "translate(1,1)");
 
-shadow.setAttribute("transform", "translate(1.5,1.5)");
-
-shadow.textContent = text.textContent;
+shadow.textContent = label;
 
 svg.appendChild(shadow);
 
-// Vorderer Text
-text.setAttribute("fill", "#ffffff");
-svg.appendChild(text);
+// ===== MAIN TEXT =====
+const text = document.createElementNS(svgNS, "text");
 
-text.textContent =
-  displayMode === "intervals"
-    ? intervalNames[interval]
-    : note;
-  text.textContent = displayMode === "intervals" ? intervalNames[interval] : note;
-  svg.appendChild(text);
+text.setAttribute("x", "50");
+text.setAttribute("y", "52");
+text.setAttribute("text-anchor", "middle");
+text.setAttribute("dominant-baseline", "middle");
+
+text.setAttribute("font-size", "38");
+text.setAttribute("font-weight", "700");
+text.setAttribute("fill", "#ffffff");
+
+text.textContent = label;
+
+svg.appendChild(text);
 
   dot.appendChild(svg);
   if(order !== null){
