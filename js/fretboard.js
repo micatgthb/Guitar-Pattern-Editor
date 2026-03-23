@@ -427,9 +427,11 @@ if (interval === 0) {
 
 }
 
+if (interval !== 0) {
   shape.setAttribute("fill", "none");
   shape.setAttribute("stroke", stroke);
   shape.setAttribute("stroke-width", strokeWidth);
+}
   shape.setAttribute("stroke-linejoin", "round");
   shape.setAttribute("stroke-linecap", "round");
   svg.appendChild(shape);
