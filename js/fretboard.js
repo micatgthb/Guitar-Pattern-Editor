@@ -391,13 +391,22 @@ svg.setAttribute("height","44");
   let textColor = "#111";
 
   if (interval === 0) {
-    shape = document.createElementNS(svgNS, "circle");
-    shape.setAttribute("cx", "50");
-    shape.setAttribute("cy", "50");
-    shape.setAttribute("r", "42");
-    stroke = "#c00000";
-    strokeWidth = "8";
-    textColor = "#c00000";
+
+  shape = document.createElementNS(svgNS, "circle");
+
+  shape.setAttribute("cx", "50");
+  shape.setAttribute("cy", "50");
+  shape.setAttribute("r", "42");
+
+  shape.setAttribute("fill", "rgba(255, 0, 0, 0.15)");
+  shape.setAttribute("stroke", "#ff3b3b");
+  shape.setAttribute("stroke-width", "4");
+
+  // 🔥 Glow-Effekt
+  shape.style.filter = "drop-shadow(0 0 6px rgba(255,0,0,0.8))";
+
+  textColor = "#ffffff";
+}
   } else if (interval === 3 || interval === 4) {
     shape = document.createElementNS(svgNS, "polygon");
     shape.setAttribute("points", "50,8 92,88 8,88");
