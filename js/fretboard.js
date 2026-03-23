@@ -441,7 +441,28 @@ text.setAttribute("fill", "#ffffff");     // weiß
 }
 
 // 🔥 KONTRAST (Gamechanger!)
-text.style.filter = "drop-shadow(0px 0px 2px rgba(0,0,0,0.8))";
+// Schatten (hinterer Text)
+const shadow = document.createElementNS(svgNS, "text");
+
+shadow.setAttribute("x", "50");
+shadow.setAttribute("y", "52");
+shadow.setAttribute("text-anchor", "middle");
+shadow.setAttribute("dominant-baseline", "middle");
+
+shadow.setAttribute("font-size", "38");
+shadow.setAttribute("font-weight", "700");
+
+shadow.setAttribute("fill", "rgba(0,0,0,0.8)");
+
+shadow.setAttribute("transform", "translate(1.5,1.5)");
+
+shadow.textContent = text.textContent;
+
+svg.appendChild(shadow);
+
+// Vorderer Text
+text.setAttribute("fill", "#ffffff");
+svg.appendChild(text);
 
 text.textContent =
   displayMode === "intervals"
