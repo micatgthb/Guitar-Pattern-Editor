@@ -397,14 +397,15 @@ if (interval === 0) {
   shape.setAttribute("cy", "50");
   shape.setAttribute("r", "42");
 
-  // ✅ ROOT STYLE (einzig hier definiert!)
-  shape.setAttribute("fill", "rgba(255, 0, 0, 0.25)");
+  // 🔴 ROOT STYLE
+  shape.setAttribute("fill", "rgba(255, 0, 0, 0.35)");
   shape.setAttribute("stroke", "#ff0000");
   shape.setAttribute("stroke-width", "5");
 
-  shape.style.filter = "drop-shadow(0 0 8px rgba(255,0,0,0.9))";
+  shape.style.filter = "drop-shadow(0 0 12px rgba(255,0,0,1))";
 
-} else if (interval === 3 || interval === 4) {
+}
+else if (interval === 3 || interval === 4) {
 
   shape = document.createElementNS(svgNS, "polygon");
   shape.setAttribute("points", "50,8 92,88 8,88");
