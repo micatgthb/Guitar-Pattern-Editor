@@ -289,15 +289,22 @@ function drawFretMarkers(){
   const grid = document.getElementById("grid")
   if(!grid) return
 
-  // alte Marker löschen (ALLE Varianten)
-  document.querySelectorAll(".fret-marker, .fret-marker-global")
-    .forEach(e => e.remove())
+  // alte Marker löschen
+  grid.querySelectorAll(".fret-marker-global").forEach(e => e.remove())
 
   const cells = grid.querySelectorAll(".cell")
-
   const markerFrets = [3,5,7,9,12]
 
   const gridRect = grid.getBoundingClientRect()
+
+  // ===== GLOBALE FEINJUSTIERUNG =====
+  const size = 18
+
+  const offsetX = -2    // ← links (-) / rechts (+)
+  const offsetY = -4    // ← hoch (-) / runter (+)
+
+  const doubleDistance = 50   // Abstand der Doppelmarker
+  const doubleOffsetY = -4    // nur Doppelmarker feinjustieren
 
   markerFrets.forEach(fret => {
 
@@ -307,11 +314,10 @@ function drawFretMarkers(){
     const topCell = fretCells[0]
     const topRect = topCell.getBoundingClientRect()
 
-    // X = mittig im Bund
-    const fretOffsetX = -5   // 👈 hier feinjustieren - nach lnks, + nach rechts
-    const x = topRect.left - gridRect.left + topRect.width / 2 + fretOffsetX
+    // ===== X POSITION =====
+    const centerX = topRect.left - gridRect.left + topRect.width / 2
 
-    // 🔥 echte Mitte zwischen den mittleren Saiten
+    // ===== Y POSITION (MITTE DER MITTLEREN SAITEN) =====
     const stringLabels = grid.querySelectorAll(".cell.string")
 
     const mid1 = stringLabels[Math.floor(stringLabels.length / 2) - 1]
@@ -320,20 +326,20 @@ function drawFretMarkers(){
     const r1 = mid1.getBoundingClientRect()
     const r2 = mid2.getBoundingClientRect()
 
-    const baseOffset = 8   // 👈 hier feinjustieren - nach oben, + nach unten
-    
     const centerY = (
-      (r1.top + r1.height / 2) + 
+      (r1.top + r1.height / 2) +
       (r2.top + r2.height / 2)
     ) / 2 - gridRect.top
-    
-    const y = centerY + baseOffset
-    // 🎯 EINZELMARKER
+
+    // ===== FINAL POSITION =====
+    const x = centerX + offsetX
+    const y = centerY + offsetY
+
+    // ===== EINZELMARKER =====
     if(fret !== 12){
 
       const m = document.createElement("div")
-      m.className = "fret-marker fret-marker-global"
-      const size = 18
+      m.className = "fret-marker-global"
 
       m.style.left = (x - size/2) + "px"
       m.style.top  = (y - size/2) + "px"
@@ -341,31 +347,28 @@ function drawFretMarkers(){
       grid.appendChild(m)
     }
 
-    // 🎯 DOPPELMARKER
+    // ===== DOPPELMARKER =====
     if(fret === 12){
 
-      const size = 18
-      const offset = 60   // 👈 HIER feinjustieren - zusammen, + auseinander
-      const doubleOffset = -4   // 👈 nur für Doppelmarker, die senkrechte Position - nach oben + nach unten
-
       const m1 = document.createElement("div")
-      m1.className = "fret-marker fret-marker-global"
+      m1.className = "fret-marker-global"
+
       m1.style.left = (x - size/2) + "px"
-      m1.style.top  = (y - offset + doubleOffset - size/2) + "px"
+      m1.style.top  = (y - doubleDistance + doubleOffsetY - size/2) + "px"
 
       const m2 = document.createElement("div")
-      m2.className = "fret-marker fret-marker-global"
-      m2.style.left = (x - size/2) + "px"
-      m2.style.top  = (y + offset + doubleOffset - size/2) + "px"
+      m2.className = "fret-marker-global"
 
-      
-      
+      m2.style.left = (x - size/2) + "px"
+      m2.style.top  = (y + doubleDistance + doubleOffsetY - size/2) + "px"
+
       grid.appendChild(m1)
       grid.appendChild(m2)
     }
 
   })
 }
+
 
 function createMarker(note, interval, displayMode, order = null) {
   const svgNS = "http://www.w3.org/2000/svg";
