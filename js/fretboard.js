@@ -386,11 +386,10 @@ svg.setAttribute("height","44");
   svg.style.overflow="visible";
 
   let shape;
-  let stroke = "#666";
-  let strokeWidth = "4";
-  let textColor = "#111";
+let stroke = "#666";
+let strokeWidth = "4";
 
-  if (interval === 0) {
+if (interval === 0) {
 
   shape = document.createElementNS(svgNS, "circle");
 
@@ -398,33 +397,35 @@ svg.setAttribute("height","44");
   shape.setAttribute("cy", "50");
   shape.setAttribute("r", "42");
 
- if (interval !== 0) {
-  shape.setAttribute("fill", "none");
-  shape.setAttribute("stroke", stroke);
-  shape.setAttribute("stroke-width", strokeWidth);
-   }
+  // ✅ ROOT STYLE (einzig hier definiert!)
+  shape.setAttribute("fill", "rgba(255, 0, 0, 0.25)");
+  shape.setAttribute("stroke", "#ff0000");
+  shape.setAttribute("stroke-width", "5");
 
-  // 🔥 Glow-Effekt
-  shape.style.filter = "drop-shadow(0 0 6px rgba(255,0,0,0.8))";
+  shape.style.filter = "drop-shadow(0 0 8px rgba(255,0,0,0.9))";
 
-  textColor = "#ffffff";
+} else if (interval === 3 || interval === 4) {
 
-  } else if (interval === 3 || interval === 4) {
-    shape = document.createElementNS(svgNS, "polygon");
-    shape.setAttribute("points", "50,8 92,88 8,88");
-    stroke = "#000";
-    strokeWidth = "8";
-  } else if (interval === 7) {
-    shape = document.createElementNS(svgNS, "polygon");
-    shape.setAttribute("points", "50,8 90,36 75,88 25,88 10,36");
-    stroke = "#000";
-    strokeWidth = "8";
-  } else {
-    shape = document.createElementNS(svgNS, "circle");
-    shape.setAttribute("cx", "50");
-    shape.setAttribute("cy", "50");
-    shape.setAttribute("r", "42");
-  }
+  shape = document.createElementNS(svgNS, "polygon");
+  shape.setAttribute("points", "50,8 92,88 8,88");
+  stroke = "#000";
+  strokeWidth = "8";
+
+} else if (interval === 7) {
+
+  shape = document.createElementNS(svgNS, "polygon");
+  shape.setAttribute("points", "50,8 90,36 75,88 25,88 10,36");
+  stroke = "#000";
+  strokeWidth = "8";
+
+} else {
+
+  shape = document.createElementNS(svgNS, "circle");
+  shape.setAttribute("cx", "50");
+  shape.setAttribute("cy", "50");
+  shape.setAttribute("r", "42");
+
+}
 
   shape.setAttribute("fill", "none");
   shape.setAttribute("stroke", stroke);
