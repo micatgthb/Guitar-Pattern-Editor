@@ -431,9 +431,14 @@ text.setAttribute("text-anchor", "middle");
 text.setAttribute("dominant-baseline", "middle");
 
 // 🔥 LESBARKEIT
-text.setAttribute("font-size", "34");     // größer
+text.setAttribute("font-size", "38");     // größer
 text.setAttribute("font-weight", "700");  // fetter
 text.setAttribute("fill", "#ffffff");     // weiß
+
+  if (interval === 0) {
+  svg.setAttribute("width","50");
+  svg.setAttribute("height","50");
+}
 
 // 🔥 KONTRAST (Gamechanger!)
 text.setAttribute("stroke", "#ffffff");
