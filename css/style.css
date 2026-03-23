@@ -179,7 +179,7 @@ button:disabled{
   width:36px;
   height:36px;
 
-  left:calc(50% - 5px);
+  left:calc(50% + 24px);
   top:calc(50% - 24px);
 
   display:flex;
