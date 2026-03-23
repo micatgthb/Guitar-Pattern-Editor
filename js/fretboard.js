@@ -441,7 +441,7 @@ text.setAttribute("fill", "#ffffff");     // weiß
 }
 
 // 🔥 KONTRAST (Gamechanger!)
-text.setAttribute("stroke", "#ffffff");
+text.setAttribute("stroke", "#000000");
 text.setAttribute("stroke-width", "2");
 
 text.textContent =
