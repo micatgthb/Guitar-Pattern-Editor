@@ -10,9 +10,28 @@ body{
 #controls{
   display:flex;
   flex-wrap:wrap;
-  gap:12px;
-  align-items:center;
-  margin-bottom:15px;
+  gap:16px;
+}
+
+.control-group{
+  background:#f8f8f8;
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:10px 14px;
+
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.group-title{
+  font-weight:700;
+  font-size:14px;
+  color:#555;
+  margin-bottom:4px;
+  text-transform:uppercase;
 }
 
 #controls label{
@@ -35,6 +54,9 @@ button:disabled{
 /* ===== BOARD WRAPPER ===== */
 
 #board-wrapper{
+  padding:10px;
+  background:#111;
+  border-radius:12px;
   position:relative;
   display:inline-block;
   height:fit-content;
