@@ -42,6 +42,11 @@
       End
       <input id="endFret" type="number" value="12">
     </label>
+
+    <button onclick="build(); drawStrings(); applyScale(); drawSequenceLines();">
+      Griffbrett aktualisieren
+    </button>
+    
   </div>
 
   <!-- 🟩 Skala -->
@@ -65,6 +70,11 @@
         <option value="intervals">Intervals</option>
       </select>
     </label>
+
+    <button onclick="applyScale(); drawSequenceLines();">
+      Skala anzeigen
+    </button>
+    
   </div>
 
   <!-- 🟨 Sequence / Playback -->
