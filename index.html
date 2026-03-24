@@ -21,68 +21,86 @@
 
 <div id="controls">
 
-<label>Instrument
-<select id="instrument">
-<option value="guitar">Guitar</option>
-<option value="bass">Bass</option>
-</select>
-</label>
+  <!-- 🟦 Instrument & Bereich -->
+  <div class="control-group">
+    <div class="group-title">Instrument</div>
 
-<label>Startbund
-<input type="number" id="startFret" value="0">
-</label>
+    <label>
+      Instrument
+      <select id="instrument">
+        <option value="guitar">Guitar</option>
+        <option value="bass">Bass</option>
+      </select>
+    </label>
 
-<label>Endbund
-<input type="number" id="endFret" value="12">
-</label>
+    <label>
+      Start
+      <input id="startFret" type="number" value="0">
+    </label>
 
-<label>Tonart
-<select id="root"></select>
-</label>
+    <label>
+      End
+      <input id="endFret" type="number" value="12">
+    </label>
+  </div>
 
-<label>Skala
-<select id="scale"></select>
-</label>
+  <!-- 🟩 Skala -->
+  <div class="control-group">
+    <div class="group-title">Skala</div>
 
-<label>Position
-<select id="position"></select>
-</label>
+    <label>
+      Root
+      <select id="root"></select>
+    </label>
 
-<label>Anzeige
-<select id="displayMode">
-<option value="notes">Noten</option>
-<option value="intervals">Intervalle</option>
-</select>
-</label>
+    <label>
+      Scale
+      <select id="scale"></select>
+    </label>
 
-<button id="applyScaleBtn" onclick="build();applyScale();updateExportHeader();">
-Skala anzeigen
-</button>
+    <label>
+      Anzeige
+      <select id="displayMode">
+        <option value="notes">Notes</option>
+        <option value="intervals">Intervals</option>
+      </select>
+    </label>
+  </div>
 
-<label>Notenwert
-<select id="durationSelect">
-  <option value="4">Viertel</option>
-  <option value="8" selected>Achtel</option>
-  <option value="16">Sechzehntel</option>
-</select>
-</label>
+  <!-- 🟨 Sequence / Playback -->
+  <div class="control-group">
+    <div class="group-title">Sequence</div>
 
-<button id="sequenceModeBtn">Sequence Mode: OFF</button>
+    <label>
+      Dauer
+      <select id="durationSelect">
+        <option value="2">1/2</option>
+        <option value="4">1/4</option>
+        <option value="8" selected>1/8</option>
+        <option value="16">1/16</option>
+      </select>
+    </label>
 
-<button id="rebuildBtn">Bundbereich</button>
-<button id="clearBtn">Clear Marker</button>
-<button id="clearSequenceBtn">Clear Sequence</button>
-<button id="exportBtn">PNG Export</button>
+    <label>
+      BPM
+      <input id="bpm" type="number" value="80">
+    </label>
 
-<input id="bpm" type="number" value="80" style="width:60px">
+    <button id="sequenceModeBtn">Sequence Mode: OFF</button>
+    <button id="clearSequenceBtn">Clear</button>
+    <button id="playBtn">Play</button>
+    <button id="stopBtn">Stop</button>
+  </div>
 
-<button id="playBtn" type="button">▶ Play</button>
-<button id="stopBtn" type="button">■ Stop</button>
+  <!-- 🟪 Daten -->
+  <div class="control-group">
+    <div class="group-title">Daten</div>
 
-<div id="exportArea">
-<button onclick="savePattern()">💾 Save</button>
-<button onclick="showLoadMenu()">📂 Load</button>
-<div id="exportHeader"></div>
+    <button id="saveBtn">Save</button>
+    <button id="loadBtn">Load</button>
+  </div>
+
+</div>
 
 <div id="board-wrapper">
   <svg id="stringLayer"></svg>
