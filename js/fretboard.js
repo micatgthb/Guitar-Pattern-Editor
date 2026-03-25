@@ -29,6 +29,10 @@ const noteToFreqMap = {
   "G#":415.30, A:440.00, "A#":466.16, B:493.88
 }
 
+function isAuto(){
+  return document.getElementById("autoMode")?.checked
+}
+
 function noteToFreq(note){
   return noteToFreqMap[note] || 440
 }
@@ -836,24 +840,27 @@ if(loadBtn){
 
 if(scaleSelect){
   scaleSelect.addEventListener("change", ()=>{
+  stopPlayback()
 
-    stopPlayback()   // wichtig!
-
+  if(isAuto()){
     applyScale()
     drawSequenceLines()
-
-  })
+  }
+})
 }
 
 const rootSelect = document.getElementById("root")
 
-if(rootSelect){
+
+  
   rootSelect.addEventListener("change", ()=>{
-    stopPlayback()
+  stopPlayback()
+
+  if(isAuto()){
     applyScale()
     drawSequenceLines()
-  })
-}
+  }
+})
 
 if(playBtn){
   playBtn.addEventListener("click", ()=>{
@@ -908,15 +915,16 @@ if(stopBtn){
   
   
 
-  if(inst){
-    inst.addEventListener("change",()=>{
-      stopPlayback()
-      build()
-      drawStrings()
-      applyScale()
-      drawSequenceLines()
-      drawFretMarkers()
-    })
+inst.addEventListener("change",()=>{
+  stopPlayback()
+
+  if(isAuto()){
+    build()
+    drawStrings()
+    applyScale()
+    drawSequenceLines()
+    drawFretMarkers()
   }
+})
 })
 
