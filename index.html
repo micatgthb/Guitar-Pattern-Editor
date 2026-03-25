@@ -37,19 +37,26 @@
       </select>
     </label>
 
-    <label>
-      Start
-      <input id="startFret" type="number" value="0">
-    </label>
+    const startFretInput = document.getElementById("startFret")
+    const endFretInput = document.getElementById("endFret")
 
-    <label>
-      End
-      <input id="endFret" type="number" value="12">
-    </label>
+    [startFretInput, endFretInput].forEach(input=>{
+      input?.addEventListener("change", ()=>{
+        if(isAuto()){
+          build()
+          drawStrings()
+          applyScale()
+          drawSequenceLines()
+          drawFretMarkers()
+        }
+      })
+    })
 
     <button onclick="build(); applyScale(); drawSequenceLines();">
       Griffbrett aktualisieren
     </button>
+
+  
     
   </div>
 
