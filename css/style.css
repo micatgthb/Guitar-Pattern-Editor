@@ -64,33 +64,27 @@ button:disabled{
 }
 
 /* ===== GRID ===== */
-
-#grid{
-  display:grid;
-  grid-auto-rows:52px;
-  outline:3px solid black;
-  gap:0px;
-
-  position:relative;
-  width:max-content;
-
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #4b2f1a 0px,
-      #6a4324 25px,
-      #3f2816 50px,
-      #7a5230 75px,
-      #4b2f1a 100px
-    ),
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.08),
-      rgba(0,0,0,0.25)
-    );
-
-  background-blend-mode:multiply;
-}
+    #grid{
+      background:
+        /* Holzmaserung */
+        repeating-linear-gradient(
+          90deg,
+          #d9b38c 0px,
+          #e6c29f 25px,
+          #cfa77e 50px,
+          #e8c9a6 75px,
+          #d9b38c 100px
+        ),
+    
+        /* leichte Tiefe */
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,0.25),
+          rgba(0,0,0,0.08)
+        );
+    
+      background-blend-mode: multiply;
+    }
 
 .cell{
   width:60px;
