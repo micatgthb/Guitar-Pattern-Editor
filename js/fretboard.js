@@ -689,22 +689,20 @@ function refreshMarkerOrders(){
 
 function drawStrings(){
 
-  console.log("DRAW STRINGS CALLED")
-
   const svg = document.getElementById("stringLayer")
   const grid = document.getElementById("grid")
-  const wrapper = document.getElementById("board-wrapper")
 
-  if(!svg || !grid || !wrapper) return
+  if(!svg || !grid) return
 
   svg.innerHTML = ""
 
   const gridRect = grid.getBoundingClientRect()
 
+  // 👉 SVG exakt auf Grid matchen
   svg.setAttribute("viewBox", `0 0 ${gridRect.width} ${gridRect.height}`)
   svg.setAttribute("width", gridRect.width)
   svg.setAttribute("height", gridRect.height)
-  
+
   svg.style.width  = gridRect.width + "px"
   svg.style.height = gridRect.height + "px"
 
@@ -713,7 +711,9 @@ function drawStrings(){
   strings.forEach(label => {
 
     const r = label.getBoundingClientRect()
-    const y = r.top - gridRect.top + r.height / 2
+
+    // 👉 WICHTIG: relativ zum GRID
+    const y = Math.round(r.top - gridRect.top + r.height / 2)
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
 
