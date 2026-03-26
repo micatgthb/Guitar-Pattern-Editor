@@ -51,6 +51,11 @@ button:disabled{
   cursor:not-allowed;
 }
 
+button{
+  width: fit-content;
+  white-space: nowrap;
+}
+
 /* ===== BOARD WRAPPER ===== */
 
 #board-wrapper{
