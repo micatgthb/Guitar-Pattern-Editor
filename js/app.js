@@ -46,7 +46,6 @@ positionSelect.appendChild(option)
 window.addEventListener("load",()=>{
 
 initControls()
-initButtons()
 
 build()
 
