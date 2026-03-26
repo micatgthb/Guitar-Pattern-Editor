@@ -61,13 +61,14 @@ button:disabled{
   display:inline-block;
   height:fit-content;
   vertical-align:top;
+
+  outline:3px solid black; /* 👈 HIERHIN */
 }
 
 /* ===== GRID ===== */
  #grid{
   display:grid;
   grid-auto-rows:52px;
-  outline:3px solid black;
   gap:0;
 
   position:relative;
