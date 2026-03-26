@@ -853,14 +853,16 @@ const rootSelect = document.getElementById("root")
 
 
   
+if(rootSelect){
   rootSelect.addEventListener("change", ()=>{
-  stopPlayback()
+    stopPlayback()
 
-  if(isAuto()){
-    applyScale()
-    drawSequenceLines()
-  }
-})
+    if(isAuto()){
+      applyScale()
+      drawSequenceLines()
+    }
+  })
+}
 
 if(playBtn){
   playBtn.addEventListener("click", ()=>{
@@ -906,11 +908,15 @@ if(stopBtn){
     })
   }
 
-  build()
-  drawStrings()
+build()
+drawStrings()
+
+if(isAuto()){
   applyScale()
   drawSequenceLines()
-  updateSequenceButton()
+}
+
+updateSequenceButton()
 
   
   
