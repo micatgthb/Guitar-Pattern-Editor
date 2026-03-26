@@ -782,7 +782,7 @@ function loadPattern(name){
 
   // neu aufbauen
   build()
-  drawStrings()
+ // drawStrings()
   applyScale()
   refreshMarkerOrders()
   drawSequenceLines()
@@ -915,7 +915,7 @@ if(stopBtn){
   }
 
 build()
-drawStrings()
+//drawStrings()
 
 if(isAuto()){
   applyScale()
