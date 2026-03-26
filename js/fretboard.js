@@ -29,7 +29,7 @@ const noteToFreqMap = {
   "G#":415.30, A:440.00, "A#":466.16, B:493.88
 }
 
-function updateAll(){
+function updateAll(forceScale = false){
 
   stopPlayback()
 
@@ -39,14 +39,15 @@ function updateAll(){
     drawFretMarkers()
   })
 
-  applyScale()
-  drawSequenceLines()
+  if(forceScale || isAuto()){
+    applyScale()
+    drawSequenceLines()
+  }
 }
 
 function autoUpdate(){
-  if(isAuto()){
-    updateAll()
-  }
+  if(!isAuto()) return
+  updateAll(true)
 }
 
 function isAuto(){
@@ -539,11 +540,6 @@ clearGrid()
 const root = document.getElementById("root").value
 const scale = document.getElementById("scale").value
 const displayMode = document.getElementById("displayMode")
-
-if(displayMode){
-  displayMode.addEventListener("change", autoUpdate)
-}
-
 const rootIndex = chromatic.indexOf(root)
 const pattern = scalePatterns[scale]
 
@@ -811,6 +807,12 @@ document.addEventListener("DOMContentLoaded",()=>{
 
   const startFretInput = document.getElementById("startFret")
   const endFretInput = document.getElementById("endFret")
+
+  const displayMode = document.getElementById("displayMode")
+
+if(displayMode){
+  displayMode.addEventListener("change", autoUpdate)
+}
 
 if(saveBtn){
   saveBtn.addEventListener("click", savePattern)
