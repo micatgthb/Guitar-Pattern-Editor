@@ -221,8 +221,8 @@ const instrument = getInstrument()
 const strings = instrument.strings
 const tuning = instrument.tuning
 
-const startFret = parseInt(document.getElementById("startFret").value, 10);
-const endFret = parseInt(document.getElementById("endFret").value, 10);
+const startFret = parseInt(document.getElementById("startFret")?.value || 0, 10);
+const endFret   = parseInt(document.getElementById("endFret")?.value || 12, 10);
   const frets = [];
   for (let f = startFret; f <= endFret; f++) {
     frets.push(f);
@@ -930,7 +930,11 @@ if(inst){
 
   if(isAuto()){
     build()
-    drawStrings()
+    
+    requestAnimationFrame(()=>{
+      drawStrings()
+      drawFretMarkers()
+    })
     applyScale()
     drawSequenceLines()
     drawFretMarkers()
