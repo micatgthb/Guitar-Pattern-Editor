@@ -709,17 +709,19 @@ function drawStrings(){
 
   const strings = Array.from(grid.querySelectorAll(".cell.string"))
 
-  const offsetX = 60 // 👈 DIE ENTSCHEIDENDE ZEILE
+  const offsetX = 60
 
   strings.forEach(label => {
 
     const r = label.getBoundingClientRect()
 
-    const y = Math.round(r.top - gridRect.top + 26)
+    const y = Math.round(
+      (r.top + r.height / 2) - gridRect.top
+    )
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
 
-    line.setAttribute("x1", offsetX)              // 👈 FIX
+    line.setAttribute("x1", offsetX)
     line.setAttribute("x2", gridRect.width)
     line.setAttribute("y1", y)
     line.setAttribute("y2", y)
