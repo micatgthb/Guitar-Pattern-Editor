@@ -705,6 +705,8 @@ function drawStrings(){
 
   svg.style.width  = gridRect.width + "px"
   svg.style.height = gridRect.height + "px"
+  svg.style.left = "0px"
+  svg.style.top  = "0px"
 
   const strings = Array.from(grid.querySelectorAll(".cell.string"))
 
@@ -718,7 +720,7 @@ function drawStrings(){
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
 
     line.setAttribute("x1", 0)
-    line.setAttribute("x2", gridRect.width)
+    line.setAttribute("x2", grid.clientWidth)
     line.setAttribute("y1", y)
     line.setAttribute("y2", y)
 
