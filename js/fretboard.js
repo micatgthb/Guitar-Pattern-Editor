@@ -833,18 +833,6 @@ document.addEventListener("DOMContentLoaded",()=>{
   const startFretInput = document.getElementById("startFret")
   const endFretInput = document.getElementById("endFret")
 
-  [startFretInput, endFretInput].forEach(input=>{
-    input?.addEventListener("change", ()=>{
-      if(isAuto()){
-        build()
-        drawStrings()
-        applyScale()
-        drawSequenceLines()
-        drawFretMarkers()
-      }
-    })
-  })
-
 if(saveBtn){
   saveBtn.addEventListener("click", savePattern)
 }
@@ -948,5 +936,5 @@ if(inst){
     drawFretMarkers()
   }
 })
-})
+}
 
