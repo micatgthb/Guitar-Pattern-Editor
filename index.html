@@ -37,6 +37,16 @@
       </select>
     </label>
 
+        <label>
+      Start
+      <input id="startFret" type="number" value="0">
+    </label>
+    
+    <label>
+      End
+      <input id="endFret" type="number" value="12">
+    </label>
+
 
     <button onclick="build(); applyScale(); drawSequenceLines();">
       Griffbrett aktualisieren
@@ -110,10 +120,9 @@
 </div>
 
 <div id="board-wrapper">
-  <div id="grid">
-    <svg id="stringLayer"></svg>
-    <svg id="sequenceLayer"></svg>
-  </div>
+  <svg id="stringLayer"></svg>
+  <svg id="sequenceLayer"></svg>
+  <div id="grid"></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
