@@ -698,7 +698,6 @@ function drawStrings(){
 
   const gridRect = grid.getBoundingClientRect()
 
-  // 👉 SVG exakt auf Grid matchen
   svg.setAttribute("viewBox", `0 0 ${gridRect.width} ${gridRect.height}`)
   svg.setAttribute("width", gridRect.width)
   svg.setAttribute("height", gridRect.height)
@@ -710,17 +709,18 @@ function drawStrings(){
 
   const strings = Array.from(grid.querySelectorAll(".cell.string"))
 
+  const offsetX = 60 // 👈 DIE ENTSCHEIDENDE ZEILE
+
   strings.forEach(label => {
 
     const r = label.getBoundingClientRect()
 
-    // 👉 WICHTIG: relativ zum GRID
     const y = Math.round(r.top - gridRect.top + 26)
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
 
-    line.setAttribute("x1", 0)
-    line.setAttribute("x2", grid.clientWidth)
+    line.setAttribute("x1", offsetX)              // 👈 FIX
+    line.setAttribute("x2", gridRect.width)
     line.setAttribute("y1", y)
     line.setAttribute("y2", y)
 
