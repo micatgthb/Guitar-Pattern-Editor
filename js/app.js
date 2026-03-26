@@ -4,7 +4,6 @@ function initControls(){
 
 const rootSelect=document.getElementById("root")
 const scaleSelect=document.getElementById("scale")
-const positionSelect=document.getElementById("position")
 
 // Tonarten
 
@@ -39,25 +38,6 @@ option.textContent="Position "+i
 positionSelect.appendChild(option)
 
 }
-
-}
-
-function initButtons(){
-
-document.getElementById("applyScaleBtn")
-.addEventListener("click",()=>{
-applyScale()
-})
-
-document.getElementById("rebuildBtn")
-.addEventListener("click",()=>{
-build()
-})
-
-document.getElementById("clearBtn")
-.addEventListener("click",()=>{
-clearGrid()
-})
 
 }
 
