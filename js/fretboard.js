@@ -713,7 +713,7 @@ function drawStrings(){
     const r = label.getBoundingClientRect()
 
     // 👉 WICHTIG: relativ zum GRID
-    const y = Math.round(r.top - gridRect.top + r.height / 2)
+    const y = Math.round(r.top - gridRect.top + 26)
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
 
