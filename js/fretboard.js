@@ -700,14 +700,13 @@ function drawStrings(){
   svg.innerHTML = ""
 
   const gridRect = grid.getBoundingClientRect()
-  const wrapperRect = wrapper.getBoundingClientRect()
 
-  svg.setAttribute("viewBox", `0 0 ${wrapperRect.width} ${wrapperRect.height}`)
+  svg.setAttribute("viewBox", `0 0 ${gridRect.width} ${gridRect.height}`)
   svg.setAttribute("width", gridRect.width)
   svg.setAttribute("height", gridRect.height)
-
-  svg.style.height = grid.offsetHeight + "px"
-  svg.style.width  = grid.offsetWidth + "px"
+  
+  svg.style.width  = gridRect.width + "px"
+  svg.style.height = gridRect.height + "px"
 
   const strings = Array.from(grid.querySelectorAll(".cell.string"))
 
