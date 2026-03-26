@@ -29,6 +29,26 @@ const noteToFreqMap = {
   "G#":415.30, A:440.00, "A#":466.16, B:493.88
 }
 
+function updateAll(){
+
+  stopPlayback()
+
+  build()
+
+  requestAnimationFrame(()=>{
+    drawFretMarkers()
+  })
+
+  applyScale()
+  drawSequenceLines()
+}
+
+function autoUpdate(){
+  if(isAuto()){
+    updateAll()
+  }
+}
+
 function isAuto(){
   return document.getElementById("autoMode")?.checked
 }
@@ -518,9 +538,11 @@ clearGrid()
 
 const root = document.getElementById("root").value
 const scale = document.getElementById("scale").value
-const displayMode = document.getElementById("displayMode").value
+const displayMode = document.getElementById("displayMode")
 
-if(!root || !scale) return
+if(displayMode){
+  displayMode.addEventListener("change", autoUpdate)
+}
 
 const rootIndex = chromatic.indexOf(root)
 const pattern = scalePatterns[scale]
@@ -687,51 +709,6 @@ function refreshMarkerOrders(){
   })
 }
 
-function drawStrings(){
-
-  const svg = document.getElementById("stringLayer")
-  const grid = document.getElementById("grid")
-
-  if(!svg || !grid) return
-
-  svg.innerHTML = ""
-
-  const gridRect = grid.getBoundingClientRect()
-
-  svg.setAttribute("viewBox", `0 0 ${gridRect.width} ${gridRect.height}`)
-  svg.setAttribute("width", gridRect.width)
-  svg.setAttribute("height", gridRect.height)
-
-  svg.style.width  = gridRect.width + "px"
-  svg.style.height = gridRect.height + "px"
-  svg.style.left = "0px"
-  svg.style.top  = "0px"
-
-  const strings = Array.from(grid.querySelectorAll(".cell.string"))
-
-  const offsetX = 60
-
-  strings.forEach(label => {
-
-    const r = label.getBoundingClientRect()
-
-    const y = Math.round(
-      (r.top + r.height / 2) - gridRect.top
-    )
-
-    const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
-
-    line.setAttribute("x1", offsetX)
-    line.setAttribute("x2", gridRect.width)
-    line.setAttribute("y1", y)
-    line.setAttribute("y2", y)
-
-    line.setAttribute("stroke", "#999")
-    line.setAttribute("stroke-width", "2")
-
-    svg.appendChild(line)
-  })
-}
 
 function savePattern(){
 
@@ -782,7 +759,6 @@ function loadPattern(name){
 
   // neu aufbauen
   build()
- // drawStrings()
   applyScale()
   refreshMarkerOrders()
   drawSequenceLines()
@@ -845,29 +821,14 @@ if(loadBtn){
 }
 
 if(scaleSelect){
-  scaleSelect.addEventListener("change", ()=>{
-  stopPlayback()
-
-  if(isAuto()){
-    applyScale()
-    drawSequenceLines()
-  }
-})
+  scaleSelect.addEventListener("change", autoUpdate)
 }
 
 const rootSelect = document.getElementById("root")
 
 
-  
-if(rootSelect){
-  rootSelect.addEventListener("change", ()=>{
-    stopPlayback()
-
-    if(isAuto()){
-      applyScale()
-      drawSequenceLines()
-    }
-  })
+  if(rootSelect){
+  rootSelect.addEventListener("change", autoUpdate)
 }
 
 if(playBtn){
@@ -915,33 +876,12 @@ if(stopBtn){
   }
 
 build()
-//drawStrings()
 
-if(isAuto()){
-  applyScale()
-  drawSequenceLines()
-}
 
 updateSequenceButton()
-
-  
   
 
 if(inst){
-  inst.addEventListener("change",()=>{
-  stopPlayback()
-
-  if(isAuto()){
-    build()
-    
-    requestAnimationFrame(()=>{
-      drawStrings()
-      drawFretMarkers()
-    })
-    applyScale()
-    drawSequenceLines()
-    drawFretMarkers()
-  }
-})
+  inst.addEventListener("change", autoUpdate)
 }
 })
