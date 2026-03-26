@@ -755,7 +755,6 @@ function loadPattern(name){
 
   // neu aufbauen
   build()
-  applyScale()
   refreshMarkerOrders()
   drawSequenceLines()
 }
