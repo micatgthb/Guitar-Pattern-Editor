@@ -539,7 +539,7 @@ clearGrid()
 
 const root = document.getElementById("root").value
 const scale = document.getElementById("scale").value
-cconst displayMode = document.getElementById("displayMode").value
+const displayMode = document.getElementById("displayMode").value
 const rootIndex = chromatic.indexOf(root)
 const pattern = scalePatterns[scale]
 
