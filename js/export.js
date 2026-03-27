@@ -1,97 +1,37 @@
-function updateExportHeader(){
+document.addEventListener("DOMContentLoaded", () => {
 
-const root = document.getElementById("root").value
-const scale = document.getElementById("scale").value
-const position = document.getElementById("position").value
-const start = document.getElementById("startFret").value
-const end = document.getElementById("endFret").value
+  const exportBtn = document.getElementById("exportPngBtn")
+  const board = document.getElementById("board-wrapper")
 
-if(!root || !scale) return
+  if(!exportBtn || !board) return
 
-let scaleName = scale.replace("_"," ")
+  exportBtn.addEventListener("click", async () => {
 
-let posText = ""
-if(position && position !== "all"){
-posText = " – Position " + position
-}
+    // 👉 kleine Sicherheit: kurz warten bis alles gerendert ist
+    await new Promise(r => requestAnimationFrame(r))
 
-const header =
-root + " " + scaleName + posText + " – Frets " + start + "-" + end
+    const canvas = await html2canvas(board, {
+      backgroundColor: null,
+      scale: 2, // 👉 höhere Auflösung
+      useCORS: true
+    })
 
-document.getElementById("exportHeader").innerText = header
-
-}
-
-
-document.getElementById("exportPngBtn").addEventListener("click",()=>{
-
-updateExportHeader()
-
-const target = document.getElementById("exportArea")
-
-setTimeout(()=>{
-
-  html2canvas(target).then(canvas=>{
-
-  const dataUrl = canvas.toDataURL("image/png")
-
-  /* iPhone / iPad */
-
-  if(/iPhone|iPad|iPod/i.test(navigator.userAgent)){
-
-  window.open(dataUrl)
-
-  return
-  }
-
-  /* andere Geräte */
-
-  const root = document.getElementById("root").value
-  const scale = document.getElementById("scale").value
-
-  let filename = "guitar_pattern"
-
-  if(root && scale){
-  filename = root + "_" + scale.replace("_","") + "_pattern"
-  }
-
-  const link = document.createElement("a")
-  link.download = filename + ".png"
-  link.href = dataUrl
-  link.click()
+    const link = document.createElement("a")
+    link.download = buildFilename()
+    link.href = canvas.toDataURL("image/png")
+    link.click()
 
   })
 
-},100)
-
 })
 
+/* ===== DATEINAME ===== */
 
-function attachHeaderUpdates(){
+function buildFilename(){
 
-const ids = [
-"root",
-"scale",
-"position",
-"startFret",
-"endFret"
-]
+  const root = document.getElementById("root")?.value || "root"
+  const scale = document.getElementById("scale")?.value || "scale"
+  const instrument = document.getElementById("instrument")?.value || "inst"
 
-ids.forEach(id=>{
-
-const el = document.getElementById(id)
-
-if(el){
-el.addEventListener("change",updateExportHeader)
+  return `${instrument}_${root}_${scale}.png`
 }
-
-})
-
-}
-
-window.addEventListener("DOMContentLoaded",()=>{
-
-attachHeaderUpdates()
-updateExportHeader()
-
-})
