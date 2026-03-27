@@ -807,6 +807,14 @@ document.addEventListener("DOMContentLoaded",()=>{
   const startFretInput = document.getElementById("startFret")
   const endFretInput = document.getElementById("endFret")
 
+  if(startFretInput){
+  startFretInput.addEventListener("input", autoUpdate)
+}
+
+if(endFretInput){
+  endFretInput.addEventListener("input", autoUpdate)
+}
+
   const displayMode = document.getElementById("displayMode")
 
 if(displayMode){
