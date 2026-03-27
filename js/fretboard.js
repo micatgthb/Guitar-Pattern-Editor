@@ -808,11 +808,11 @@ document.addEventListener("DOMContentLoaded",()=>{
   const endFretInput = document.getElementById("endFret")
 
   if(startFretInput){
-  startFretInput.addEventListener("input", autoUpdate)
+  startFretInput.addEventListener("change", autoUpdate)
 }
 
 if(endFretInput){
-  endFretInput.addEventListener("input", autoUpdate)
+  endFretInput.addEventListener("change", autoUpdate)
 }
 
   const displayMode = document.getElementById("displayMode")
