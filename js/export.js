@@ -23,7 +23,7 @@ document.getElementById("exportHeader").innerText = header
 }
 
 
-document.getElementById("exportBtn").addEventListener("click",()=>{
+document.getElementById("exportPngBtn").addEventListener("click",()=>{
 
 updateExportHeader()
 
