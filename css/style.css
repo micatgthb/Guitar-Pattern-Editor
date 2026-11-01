@@ -276,3 +276,22 @@ button{
   margin-bottom:10px;
   text-align:center;
 }
+
+/* Short rhythmic tablatures */
+#tab-panel { max-width: 1000px; margin: 24px 0; padding: 20px; border: 1px solid #ddd; border-radius: 12px; background: #fafafa; }
+#tab-panel h2 { margin-top: 0; }
+#tab-panel p { line-height: 1.5; }
+#tab-status { min-height: 1.5em; font-weight: 600; }
+#tab-score { overflow-x: auto; background: white; border: 1px solid #ddd; margin: 12px 0; }
+#tab-score svg { display: block; width: 100%; min-width: 760px; }
+#tab-panel details { margin-top: 16px; }
+#sequence-editor li { padding: 6px; }
+#sequence-editor button, #sequence-editor select { margin-left: 10px; }
+@media print {
+  body > :not(#tab-panel) { display: none !important; }
+  #tab-panel { border: 0; padding: 0; margin: 0; max-width: none; background: white; }
+  #tab-panel > :not(#tab-score):not(h2) { display: none; }
+  #tab-score { border: 0; overflow: visible; }
+  #tab-score svg { min-width: 0; width: 100%; }
+  @page { size: A4 portrait; margin: 12mm; }
+}

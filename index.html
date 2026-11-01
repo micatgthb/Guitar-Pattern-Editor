@@ -78,7 +78,7 @@
       </select>
     </label>
 
-    <button onclick="applyScale(); drawSequenceLines();">
+    <button onclick="applyScale(); syncSequenceView();">
       Skala aktualisieren
     </button>
     
@@ -91,6 +91,7 @@
     <label>
       Dauer
       <select id="durationSelect">
+        <option value="1">1/1</option>
         <option value="2">1/2</option>
         <option value="4">1/4</option>
         <option value="8" selected>1/8</option>
@@ -100,11 +101,12 @@
 
     <label>
       BPM
-      <input id="bpm" type="number" value="80">
+      <input id="bpm" type="number" value="80" min="20" max="300">
     </label>
 
     <button id="sequenceModeBtn">Sequence Mode: OFF</button>
     <button id="clearSequenceBtn">Clear</button>
+    <button id="addRestBtn">Pause einfügen</button>
     <button id="playBtn">Play</button>
     <button id="stopBtn">Stop</button>
   </div>
@@ -125,11 +127,23 @@
   <div id="grid"></div>
 </div>
 
+<section id="tab-panel" aria-labelledby="tab-heading">
+  <h2 id="tab-heading">Tabulatur · 4/4</h2>
+  <p>Sequence Mode einschalten, Notenwert wählen und die Saite am gewünschten Bund anklicken.
+  Jeder Klick hängt einen Ton an, auch Wiederholungen. Pausen verwenden den gewählten Notenwert.</p>
+  <p id="tab-status" role="status" aria-live="polite"></p>
+  <div id="tab-score"></div>
+  <button id="exportTabBtn">TAB als SVG speichern</button>
+  <button id="printTabBtn">TAB drucken / PDF</button>
+  <details><summary>Sequenz bearbeiten</summary><ol id="sequence-editor"></ol></details>
+</section>
+
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <script src="js/scales.js?v=1"></script>
-<script src="js/fretboard.js?v=1"></script>
-<script src="js/app.js?v=1"></script>
+<script src="js/fretboard.js?v=2"></script>
+<script src="js/tab.js?v=2"></script>
+<script src="js/app.js?v=2"></script>
 <script src="js/export.js?v=1"></script>
 
 <script>

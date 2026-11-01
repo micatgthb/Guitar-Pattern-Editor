@@ -43,6 +43,7 @@ function updateAll(forceScale = false){
     applyScale()
     drawSequenceLines()
   }
+  syncSequenceView()
 }
 
 function autoUpdate(){
@@ -59,6 +60,7 @@ function noteToFreq(note){
 }
 
 let audioCtx = null
+const activeOscillators = new Set()
 
 function getAudioContext(){
   if(!audioCtx){
@@ -84,6 +86,8 @@ function playTone(freq, duration = 0.3){
   osc.connect(gain)
   gain.connect(ctx.destination)
 
+  activeOscillators.add(osc)
+  osc.onended = () => activeOscillators.delete(osc)
   osc.start()
   osc.stop(ctx.currentTime + duration)
 }
@@ -92,7 +96,7 @@ function startPlayback(){
 
   if(sequence.length === 0) return
 
-  const bpm = parseInt(document.getElementById("bpm")?.value || 80)
+  const bpm = Math.min(300, Math.max(20, parseInt(document.getElementById("bpm")?.value, 10) || 80))
   const seq = getSortedSequence()
 
   playbackIndex = 0
@@ -104,10 +108,14 @@ function startPlayback(){
     const step = seq[playbackIndex]
     if(!step) return
 
-    const freq = noteToFreq(step.note)
     const durationMs = getDurationMs(step.duration, bpm)
 
-    playTone(freq, durationMs / 1000)
+    if(!step.rest){
+      const openMidi = document.getElementById("instrument").value === "bass"
+        ? [43, 38, 33, 28] : [64, 59, 55, 50, 45, 40]
+      const midi = openMidi[Number(step.string)] + Number(step.fret)
+      playTone(440 * 2 ** ((midi - 69) / 12), durationMs / 1000)
+    }
 
     playbackIndex++
     if(playbackIndex >= seq.length){
@@ -122,6 +130,8 @@ function startPlayback(){
 }
 
 function stopPlayback(){
+  activeOscillators.forEach(osc => osc.stop())
+  activeOscillators.clear()
   if(playbackInterval){
     clearTimeout(playbackInterval)
     playbackInterval = null
@@ -147,6 +157,7 @@ function getDurationMs(duration, bpm){
   const beat = 60000 / bpm
 
   switch(duration){
+    case "1": return beat * 4
     case "2": return beat * 2
     case "4": return beat
     case "8": return beat / 2
@@ -180,7 +191,7 @@ function addSequencePoint(cell){
     duration: duration
   }
 
-  sequence.push(data)
+  return appendTabStep(data)
 }
 
 function removeSequencePoint(cell){
@@ -205,7 +216,9 @@ function renumberSequence(){
 }
 
 function clearSequence(){
+  stopPlayback()
   sequence = []
+  renderTab()
 
   document.querySelectorAll("#grid .dot").forEach(marker => {
     delete marker.dataset.order
@@ -587,20 +600,8 @@ function handleCellClick(event){
   const interval = (noteIndex - rootIndex + 12) % 12
 
   const existingMarker = cell.querySelector(".dot")
-  const existingOrder = existingMarker?.dataset.order
-
   if(sequenceMode){
-
-    if(!existingMarker) return
-
-    if(!existingOrder){
-      addSequencePoint(cell)
-    } else {
-      removeSequencePoint(cell)
-    }
-
-    refreshMarkerOrders()
-    drawSequenceLines()
+    if(addSequencePoint(cell)) syncSequenceView()
     return
   }
 
@@ -632,11 +633,13 @@ function drawSequenceLines(){
   svg.style.height = rect.height + "px"
   svg.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`)
 
-  const markers = Array.from(grid.querySelectorAll(".dot[data-order]"))
+  const markers = getSortedSequence().filter(p => !p.rest).map(p =>
+    grid.querySelector(`.cell[data-string="${p.string}"][data-fret="${p.fret}"] .dot`)
+  )
 
   if(markers.length < 2) return
 
-  markers.sort((a,b) => Number(a.dataset.order) - Number(b.dataset.order))
+
 
   const gridRect = grid.getBoundingClientRect()
 
@@ -645,6 +648,7 @@ function drawSequenceLines(){
     if(i === markers.length - 1) return
 
     const next = markers[i + 1]
+    if(!marker || !next) return
 
     const a = marker.getBoundingClientRect()
     const b = next.getBoundingClientRect()
@@ -686,18 +690,19 @@ function refreshMarkerOrders(){
     const string = cell.dataset.string
     const fret = cell.dataset.fret
 
-    const point = sequence.find(p =>
+    const points = sequence.filter(p => !p.rest &&
       p.string === string && p.fret === fret
     )
 
     marker.querySelectorAll(".order-label").forEach(el => el.remove())
 
-    if(point){
+    if(points.length){
+      const point = points[0]
       marker.dataset.order = String(point.order)
 
       const label = document.createElement("div")
       label.className = "order-label"
-      label.textContent = point.order
+      label.textContent = points.map(p => p.order).join(", ")
       marker.appendChild(label)
     } else {
       delete marker.dataset.order
@@ -739,6 +744,7 @@ function loadPattern(name){
   // UI wiederherstellen
   if(data.instrument){
     document.getElementById("instrument").value = data.instrument
+    document.getElementById("instrument").dataset.previous = data.instrument
   }
 
   if(data.root){
@@ -753,10 +759,9 @@ function loadPattern(name){
     document.getElementById("bpm").value = data.bpm
   }
 
-  // neu aufbauen
-  build()
-  refreshMarkerOrders()
-  drawSequenceLines()
+  // Restore fretboard markers as well as the saved sequence.
+  updateAll(true)
+  syncSequenceView()
 }
 
 function listPatterns(){
@@ -863,10 +868,10 @@ if(stopBtn){
         grid.classList.toggle("sequence-mode", sequenceMode)
       }
 
-      if(!sequenceMode){
-        clearSequence()
-      }
+      stopPlayback()
+      if(!sequenceMode) document.getElementById("sequenceLayer").innerHTML = ""
 
+      if(sequenceMode) syncSequenceView()
       updateSequenceButton()
 
       if(clearBtn){
@@ -891,6 +896,15 @@ updateSequenceButton()
   
 
 if(inst){
-  inst.addEventListener("change", autoUpdate)
+  inst.dataset.previous = inst.value
+  inst.addEventListener("change", () => {
+    if(sequence.length && !confirm("Instrument wechseln und die aktuelle Sequenz löschen?")){
+      inst.value = inst.dataset.previous
+      return
+    }
+    inst.dataset.previous = inst.value
+    clearSequence()
+    updateAll(true)
+  })
 }
 })
