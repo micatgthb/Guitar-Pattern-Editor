@@ -1,6 +1,6 @@
-const CACHE_NAME = "fretboard-v2-tabs";
+const CACHE_NAME = "fretboard-v3-rhythm";
 const FILES_TO_CACHE = ["/", "/index.html", "/css/style.css", "/js/scales.js?v=1",
-  "/js/fretboard.js?v=2", "/js/tab.js?v=2", "/js/app.js?v=2", "/js/export.js?v=1"];
+  "/js/fretboard.js?v=2", "/js/tab.js?v=3", "/js/app.js?v=2", "/js/export.js?v=1"];
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
