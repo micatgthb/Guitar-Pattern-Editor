@@ -23,22 +23,6 @@ option.textContent=scale.replace("_"," ")
 scaleSelect.appendChild(option)
 })
 
-// Positionen
-
-let all=document.createElement("option")
-all.value="all"
-all.textContent="alle"
-positionSelect.appendChild(all)
-
-for(let i=1;i<=5;i++){
-
-let option=document.createElement("option")
-option.value=i
-option.textContent="Position "+i
-positionSelect.appendChild(option)
-
-}
-
 }
 
 // Start erst wenn DOM fertig ist
@@ -47,6 +31,7 @@ window.addEventListener("load",()=>{
 
 initControls()
 
-build()
+updateAll(true)
+renderTab()
 
 })
