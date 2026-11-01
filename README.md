@@ -77,7 +77,7 @@ including repeated notes at the same position. **Pause einfügen** appends a res
 of the selected duration. Playback uses the actual string octave and respects rests.
 
 The TAB preview contains four 4/4 bars, beat numbers and explicit duration labels
-(`1/4`, `1/8`, etc.). Empty space is unfinished input, not an implicit rest.
+(`1/4`, `1/8`, etc.). A rhythm row below each TAB staff adds noteheads, stems and individual flags (one for eighth notes, two for sixteenths); whole and half notes have open noteheads. Empty space is unfinished input, not an implicit rest.
 New notes must fit in the remaining part of a bar. Under **Sequenz bearbeiten**,
 change individual durations or delete entries. Existing saved sequences longer
 than four bars are preserved and displayed in additional bars.

@@ -43,12 +43,37 @@ function svgElement(tag, attrs = {}, text){
   return el
 }
 
+// A separate rhythm row keeps stems clear of fret numbers on every string.
+function rhythmSymbol(x, y, duration){
+  const value = String(duration || '8')
+  const group = svgElement('g', { 'aria-label': `Notenwert 1/${value}`, 'data-duration': value })
+  group.appendChild(svgElement('ellipse', {
+    cx: x, cy: y, rx: value === '1' ? 7 : 5.5, ry: 3.7,
+    transform: `rotate(-20 ${x} ${y})`,
+    fill: value === '1' || value === '2' ? 'white' : '#222',
+    stroke: '#222', 'stroke-width': 1.5
+  }))
+  if(value !== '1'){
+    group.appendChild(svgElement('line', { x1: x + 5, y1: y, x2: x + 5, y2: y - 29,
+      stroke: '#222', 'stroke-width': 1.5 }))
+    const flags = value === '16' ? 2 : value === '8' ? 1 : 0
+    for(let flag = 0; flag < flags; flag++){
+      const top = y - 29 + flag * 8
+      group.appendChild(svgElement('path', {
+        d: `M ${x + 5} ${top} C ${x + 7} ${top + 8}, ${x + 20} ${top + 8}, ${x + 13} ${top + 22} C ${x + 24} ${top + 9}, ${x + 12} ${top + 5}, ${x + 5} ${top} Z`,
+        fill: '#222'
+      }))
+    }
+  }
+  return group
+}
+
 function renderTab(){
   const target = document.getElementById('tab-score')
   if(!target) return
   const steps = getSortedSequence()
   const strings = getInstrument().strings
-  const barHeight = strings.length * 23 + 94
+  const barHeight = strings.length * 23 + 144
   const ticks = sequenceTicks(steps)
   // Preserve older saved sequences even if they exceed the new four-bar limit.
   const bars = Math.max(4, Math.ceil(ticks / 16))
@@ -84,6 +109,7 @@ function renderTab(){
       text(x - 4, top + 53, continued ? 'weiter' : `1/${step.duration || '8'}`, 11)
       if(step.rest){ text(x - 3, top + 88, 'P', 17) }
       else {
+        if(!continued) svg.appendChild(rhythmSymbol(x + 2, top + 73 + (strings.length - 1) * 23 + 43, step.duration))
         const y = top + 73 + Number(step.string) * 23
         svg.appendChild(svgElement('rect', { x: x - 6, y: y - 11, width: 30, height: 21, fill: 'white' }))
         text(x - 3, y + 5, continued ? '~' : step.fret, 17)
